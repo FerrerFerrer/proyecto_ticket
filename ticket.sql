@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-03-2023 a las 18:36:51
+-- Tiempo de generación: 23-03-2023 a las 18:48:33
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -31,8 +31,15 @@ CREATE TABLE `admin` (
   `id_admin` int(11) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `phone` int(10) NOT NULL
+  `phone` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `email`, `password`, `phone`) VALUES
+(1, 'admin', 'admin1234', NULL);
 
 -- --------------------------------------------------------
 
@@ -44,6 +51,16 @@ CREATE TABLE `asunto` (
   `id_asunto` int(11) NOT NULL,
   `descripcion` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `asunto`
+--
+
+INSERT INTO `asunto` (`id_asunto`, `descripcion`) VALUES
+(1, 'inscripcion'),
+(2, 'recursar'),
+(3, 'baja'),
+(4, 'constancia');
 
 -- --------------------------------------------------------
 
@@ -57,6 +74,17 @@ CREATE TABLE `municipio` (
   `estado` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `municipio`
+--
+
+INSERT INTO `municipio` (`id_municipio`, `municipio`, `estado`) VALUES
+(1, 'saltillo', 'coahuila'),
+(2, 'monterrey', 'nuevo leon'),
+(3, 'arteaga', 'coahuila'),
+(4, 'ramos', 'coahuila'),
+(5, 'parras', 'coahuila');
+
 -- --------------------------------------------------------
 
 --
@@ -67,6 +95,15 @@ CREATE TABLE `nivel` (
   `id_nivel` int(11) NOT NULL,
   `nivel` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `nivel`
+--
+
+INSERT INTO `nivel` (`id_nivel`, `nivel`) VALUES
+(1, 'preescolar'),
+(2, 'primaria'),
+(3, 'secundaria');
 
 -- --------------------------------------------------------
 
@@ -135,25 +172,25 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT de la tabla `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `asunto`
 --
 ALTER TABLE `asunto`
-  MODIFY `id_asunto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_asunto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `municipio`
 --
 ALTER TABLE `municipio`
-  MODIFY `id_municipio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_municipio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `nivel`
 --
 ALTER TABLE `nivel`
-  MODIFY `id_nivel` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_nivel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `ticket`
