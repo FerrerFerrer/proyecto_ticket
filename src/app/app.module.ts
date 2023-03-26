@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
+import { MenuTopbarComponent } from './components/menu-topbar/menu-topbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TicketComponent,
-    LoginComponent
+    LoginComponent,
+    MenuTopbarComponent
   ],
   imports: [
     BrowserModule,
