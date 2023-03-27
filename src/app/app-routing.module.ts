@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'ticket', component: TicketComponent },
   { path: 'login', component: LoginComponent },
   { path: '', component: LoginComponent },
-  {path: 'admin', component: InterAdminComponent}
+  { path: 'admin', component: InterAdminComponent }
 ];
 
 @NgModule({
