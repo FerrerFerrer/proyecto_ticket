@@ -96,7 +96,4 @@ export class TicketComponent {
       alert('Todos los campos son válidos');
     }
   }
-  
-  
-
 }
