@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-03-2023 a las 18:48:33
+-- Tiempo de generación: 27-03-2023 a las 18:05:34
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -112,6 +112,7 @@ INSERT INTO `nivel` (`id_nivel`, `nivel`) VALUES
 --
 
 CREATE TABLE `ticket` (
+  `id_ticket` int(11) NOT NULL,
   `folio` int(11) NOT NULL,
   `nombre_completo` varchar(200) NOT NULL,
   `nombre` varchar(100) NOT NULL,
@@ -124,7 +125,8 @@ CREATE TABLE `ticket` (
   `celular` int(10) NOT NULL,
   `municipio` int(11) NOT NULL,
   `asunto` int(11) NOT NULL,
-  `nivel` int(11) NOT NULL
+  `nivel` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -159,7 +161,7 @@ ALTER TABLE `nivel`
 -- Indices de la tabla `ticket`
 --
 ALTER TABLE `ticket`
-  ADD PRIMARY KEY (`folio`),
+  ADD PRIMARY KEY (`id_ticket`),
   ADD KEY `asunto_ticket` (`asunto`),
   ADD KEY `municipio_ticket` (`municipio`),
   ADD KEY `nivel_ticket` (`nivel`);
@@ -196,7 +198,7 @@ ALTER TABLE `nivel`
 -- AUTO_INCREMENT de la tabla `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `folio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ticket` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
