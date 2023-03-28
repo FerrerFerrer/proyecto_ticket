@@ -1,0 +1,181 @@
+<app-menu-topbar></app-menu-topbar>
+<div class="">
+        <div class="row">
+                <div class="encabezado">
+                        <h1>Ticket de turno</h1>
+                </div>
+        </div>
+
+        <form name="busqueda" [formGroup]="searchForm" (ngSubmit)="Busqueda()">
+                <div class="row" style="justify-content:right;">
+                
+                        <div class="col-20">
+                                <div class="col-30">
+                                        <label for="folio">Folio:</label>
+                                </div>
+                                <div class="col-70">
+                                        <input type="text" formControlName="folio" name="folio">
+                                </div>
+                        </div>
+                        <div class="col-20">
+                                <div class="col-30">
+                                        <label for="curpSch">CURP:</label>  
+                                </div>
+                                <div class="col-70">
+                                        <input type="text" name="curpSch" formControlName="curpSch">  
+                                </div>
+                        </div>
+                        <div class="col-10">
+                                <button id="search" type="submit">Buscar</button>
+                        </div>        
+                </div>
+        </form>
+
+        <form name="registar" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                        <div class="col-60">
+                                <div class="col-30">
+                                        <label for="fullname">Nombre completo:</label>
+                                </div>
+                                <div class="col-70">
+                                        <input type="text" formControlName="fullname" name="fullname">
+                                </div>
+                        </div>
+
+                        <div class="col-30">
+                                <div class="col-30">
+                                        <label for="curp">CURP:</label>
+                                </div>
+                                <div class="col-70">
+                                        <input type="text" formControlName="curp" name="curp">
+                                </div>
+                        </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-30">
+                                <div class="col-30">
+                                        <label for="name">Nombre:</label>
+                                </div>
+                                <div class="col-70">
+                                        <input type="text" formControlName="name" name="name">
+                                </div>
+                        </div>
+                        <div class="col-30">
+                                <div class="col-30">
+                                        <label for="paterno">Paterno:</label>
+                                </div>
+                                <div class="col-70">
+                                        <input type="text" formControlName="paterno" name="paterno">
+                                </div>
+                        </div>
+                        <div class="col-30">
+                                <div class="col-30">
+                                        <label for="materno">Materno:</label>
+                                </div>
+                                <div class="col-70">
+                                        <input type="text" formControlName="materno" name="materno">
+                                </div>
+                        </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-30">
+                                <div class="col-30">
+                                        <label for="telefono">Telefono:</label>
+                                </div>
+                                <div class="col-70">
+                                        <input type="text" formControlName="telefono" name="telefono">
+                                </div>
+                        </div>
+                        <div class="col-30">
+                                <div class="col-30">
+                                        <label for="celular">Celular:</label>
+                                </div>
+                                <div class="col-70">
+                                        <input type="text" formControlName="celular" name="celular">
+                                </div>
+                        </div>
+                        <div class="col-30">
+                                <div class="col-30">
+                                        <label for="f_correo">Correo:</label>
+                                </div>
+                                <div class="col-70">
+                                        <input type="text" formControlName="correo" name="f_correo">
+                                </div>
+                        </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-60">
+                                <label for="f_nivel">¿Nivel al que desea ingresar o que ya cursa el alumno?</label>
+                        </div>
+                        <div class="col-30">
+                                <select formControlName="nivel" name="f_nivel">
+                                        <option value="" selected disabled hidden>Seleccione el Nivel</option>
+                                        <option value="preescolar">Preescolar</option>
+                                        <option value="primaria">Primaria</option>
+                                        <option value="secundaria">Secundaria</option>
+                                </select>
+                        </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-60">
+                                <label for="f_municipio">Municipio donde desea estudiar el alumno:</label>
+                        </div>
+                        <div class="col-30">
+                                <select  formControlName="municipio" name="f_municipio">
+                                        <option value="" selected disabled hidden>Selecciona un municipio</option>
+                                        <option value="saltillo">Saltillo</option>
+                                        <option value="monterrey">Monterrey</option>
+                                        <option value="parras">Parras</option>
+                                        <option value="arteaga">Arteaga</option>
+                                        <option value="ramos">Ramos</option>
+                                </select>
+                        </div>
+                </div>
+                
+                <div class="row">
+                        <div class="col-60">
+                                <label for="f_asunto">Selecciona el asunto a tratar</label>
+                        </div>
+                        <div class="col-30">
+                                <select formControlName="asunto" name="f_asunto">
+                                        <option value="" selected disabled hidden>Seleccione el Asunto</option>
+                                        <option value="inscripcion">Inscripcion</option>
+                                        <option value="recursar">Recursar</option>
+                                        <option value="baja">Baja</option>
+                                        <option value="constancia">Constancia</option>
+                                </select>
+                        </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-60">
+                                <label for="f_status">Estatus del ticket</label>
+                        </div>
+                        <div class="col-30">
+                                <select formControlName="status" name="f_status">
+                                        <option value="" selected disabled hidden>Seleccione el Status</option>
+                                        <option value="pendiente">Pendiente</option>
+                                        <option value="resuelto">Resuelto</option>
+                                </select>
+                        </div>
+                </div>
+        
+
+                <div class="row" style="justify-content: space-around;">
+                        <div class="col-30 cen">
+                                <button id="add" (click)="Agregar()">Agregar</button>
+                        </div>
+                
+                        <div class="col-30 cen">
+                                <button id="edi" (click)="Editar()">Editar</button>
+                        </div>
+                        <div class="col-30 cen">
+                                <button id="del" (click)="Eliminar()">Eliminar</button>
+                        </div>
+                </div>
+        </form>
+</div>
