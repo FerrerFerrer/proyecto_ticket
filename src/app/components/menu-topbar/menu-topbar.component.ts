@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,10 +9,16 @@ import { Router } from '@angular/router';
 export class MenuTopbarComponent {
 
 
+  id = localStorage.getItem("id_admin");
   constructor(private router: Router){
   }
 
-  
+  ngOnInit() {
+    console.log(this.id);
+    // if(id != null){
+
+    // }
+  }
 
   cerrarSesion(){
     localStorage.removeItem("id_admin")
