@@ -10,6 +10,22 @@ import { HttpClient } from '@angular/common/http';
 export class TicketComponent {
   title = 'tarea-angular';
 
+  Globalticket = {
+    id_ticket_muni: 0,
+    nombre_completo: "",
+    nombre: "",
+    paterno: "",
+    materno: "",
+    curp: "",
+    edad: 0,
+    telefono: 0,
+    celular: 0,
+    correo: "",
+    grado: 0,
+    municipio: 0,
+    asunto: 0
+};
+
   registerForm !: FormGroup
   submitted = false;
   constructor(private formBuilder: FormBuilder) {}
@@ -119,7 +135,7 @@ export class TicketComponent {
     // };
 
     const ticket = {
-      id_ticket_muni: 1,
+      id_ticket_muni: this.Globalticket.id_ticket_muni,
       nombre_completo: 'Juan Alejandfro',
       nombre: 'Juan Alejandfro',
       paterno: 'Juan Alejandfro',
