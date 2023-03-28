@@ -50,9 +50,9 @@ export class InterAdminComponent {
     const name = this.registerForm.controls['name'].value;
     const paterno = this.registerForm.controls['paterno'].value;
     const materno = this.registerForm.controls['materno'].value;
-    const interes = this.registerForm.controls['interes'].value;
-    const interes2 = this.registerForm.controls['interes2'].value;
-    const interes3 = this.registerForm.controls['interes3'].value;
+    const asunto = this.registerForm.controls['asunto'].value;
+    const municipio = this.registerForm.controls['municipio'].value;
+    const nivel = this.registerForm.controls['nivel'].value;
   
     const telefonoRegex = /^[0-9]{10}$/;
     const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -83,13 +83,13 @@ export class InterAdminComponent {
     else if (!correoRegex.test(correo)) {
       alert('El campo de correo electrónico debe tener un formato válido');
     }
-    else if (interes === 'Interes') {
-      alert('Debe seleccionar una opción para el campo de "Interes"');
+    else if (asunto === '') {
+      alert('Debe seleccionar una opción para el campo de asunto');
     }
-    else if (interes2 === 'Municipio') {
+    else if (municipio === '') {
       alert('Debe seleccionar una opción para el nivel');
     }
-    else if (interes3 === 'Interes') {
+    else if (nivel === '') {
       alert('Debe seleccionar una opción para el municipio');
     }
     else {
