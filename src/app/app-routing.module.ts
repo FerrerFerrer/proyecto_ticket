@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: InterAdminComponent },
   { path: 'home', component: HomeComponent },
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent }  
 ];
 
 @NgModule({
