@@ -7,6 +7,7 @@ import { TicketComponent } from './components/ticket/ticket.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { MenuTopbarComponent } from './components/menu-topbar/menu-topbar.component';
+import { RecaptchaModule, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
