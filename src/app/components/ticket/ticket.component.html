@@ -36,7 +36,8 @@
           <div class="mb-3">
             <label for="nombre">Nombre:</label>
             <input formControlName="nombre" name="nombre" type="text" id="f_nombre" [ngClass]="{ 'is-invalid': submitted &&
-              registerForm.controls['nombre'].errors }">
+              registerForm.controls['nombre'].errors }" 
+              [(ngModel)]="Globalticket.nombre" >
             <div *ngIf="submitted && registerForm.controls['nombre'].errors" class="text-danger">
               <div *ngIf="registerForm.controls['nombre'].errors['required']">Nombre
                 es requerido</div>
