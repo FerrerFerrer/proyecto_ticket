@@ -10,22 +10,21 @@
       <label>Password</label>
     </div>
 
-  <div [hidden]="captcha">
-    <p>Hello potential human...</p>
-    <re-captcha (resolved)="resolved($event)" siteKey="6Ld2vTwlAAAAAOq2HOmphIqkqUM88LNbukDeX_mJ"></re-captcha>
+  <div id="captcha" [hidden]="captcha">
+    <re-captcha  (resolved)="resolved($event)" siteKey="6Ld2vTwlAAAAAOq2HOmphIqkqUM88LNbukDeX_mJ"></re-captcha>
   </div>
   <div [hidden]="!captcha">
-      <p>{{email}}</p>
+      <a href="#" >
+      
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </a>
 
   </div>
-    <a href="#">
-      
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      Submit
-    </a>
+    
   </form>
   <p>Don't have an account? <a href="" class="a2">Sign up!</a></p>
 </div>
