@@ -49,4 +49,7 @@ export class LoginComponent {
       this.datosIncorrectos = false;
     }, 3000);
   }
+  home(){
+    this.router.navigateByUrl('/home');
+  }
 }
