@@ -111,4 +111,5 @@ export class InterAdminComponent {
   Eliminar(){
 
   }
+
 }
