@@ -10,6 +10,7 @@ import { MenuTopbarComponent } from './components/menu-topbar/menu-topbar.compon
 import { InterAdminComponent } from './components/inter-admin/inter-admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RecaptchaModule, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -25,9 +26,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RecaptchaModule
   ],
-  providers: [],
+  providers: [{ 
+    provide: RECAPTCHA_SETTINGS,
+    useValue: '6LcWByglAAAAAOWXTSiXQo7ve_uipxdKe5j1J8wm'
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

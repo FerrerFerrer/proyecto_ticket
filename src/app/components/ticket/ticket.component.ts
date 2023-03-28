@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ticket',
@@ -9,10 +10,26 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class TicketComponent {
   title = 'tarea-angular';
 
+  Globalticket = {
+    id_ticket_muni: 0,
+    nombre_completo: "",
+    nombre: "",
+    paterno: "",
+    materno: "",
+    curp: "",
+    edad: 0,
+    telefono: 0,
+    celular: 0,
+    correo: "",
+    grado: 0,
+    municipio: 0,
+    asunto: 0
+};
+
   registerForm !: FormGroup
   submitted = false;
-  constructor(private formBuilder: FormBuilder) {
-  }
+  constructor(private formBuilder: FormBuilder) {}
+
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       nombreCompleto: ['', Validators.required],
@@ -20,6 +37,7 @@ export class TicketComponent {
       nombre: ['', Validators.required],
       paterno: ['', Validators.required],
       materno: ['', Validators.required],
+      edad: ['', Validators.required],
       telefono: ['', Validators.required],
       celular: ['', Validators.required],
       correo: ['', Validators.required, Validators.email],
@@ -36,8 +54,7 @@ export class TicketComponent {
     if (this.registerForm.invalid) {
       this.validar_aspirante();
     }else {
-      alert("SUCCESS")
-
+      this.crear_Ticket();
     }
   }
  
@@ -50,6 +67,7 @@ export class TicketComponent {
     const nombre = this.registerForm.controls['nombre'].value;
     const paterno = this.registerForm.controls['paterno'].value;
     const materno = this.registerForm.controls['materno'].value;
+    const edad = this.registerForm.controls['edad'].value;
     const interes = this.registerForm.controls['interes'].value;
     const interes2 = this.registerForm.controls['interes2'].value;
     const interes3 = this.registerForm.controls['interes3'].value;
@@ -74,6 +92,9 @@ export class TicketComponent {
     else if (materno.length < 5) {
       alert('El campo de apellido materno debe contener al menos 5 caracteres');
     }
+    else if (edad.length < 0) {
+      alert('El campo de apellido edad debe ser mayor a cero');
+    }
     else if (!telefonoRegex.test(telefono)) {
       alert('El campo de teléfono debe tener 10 dígitos numéricos');
     }
@@ -96,4 +117,56 @@ export class TicketComponent {
       alert('Todos los campos son válidos');
     }
   }
+
+  crear_Ticket(){
+    // const ticket = {
+    //   nombre_completo: this.registerForm.controls['nombreCompleto'].value,
+    //   nombre: this.registerForm.controls['nombre'].value,
+    //   paterno: this.registerForm.controls['paterno'].value,
+    //   materno: this.registerForm.controls['materno'].value,
+    //   curp: this.registerForm.controls['curp'].value,
+    //   edad: this.registerForm.controls['edad'].value,
+    //   telefono: this.registerForm.controls['telefono'].value,
+    //   celular: this.registerForm.controls['celular'].value,
+    //   correo: this.registerForm.controls['correo'].value,
+    //   grado: this.registerForm.controls['interes'].value,
+    //   municipio: this.registerForm.controls['interes2'].value,
+    //   asunto: this.registerForm.controls['interes3'].value,
+    // };
+
+    const ticket = {
+      id_ticket_muni: this.Globalticket.id_ticket_muni,
+      nombre_completo: 'Juan Alejandfro',
+      nombre: 'Juan Alejandfro',
+      paterno: 'Juan Alejandfro',
+      materno: 'Juan Alejandfro',
+      curp: 'Juan Alejandfro',
+      edad: 6,
+      telefono: 8444,
+      celular: 4555,
+      correo: 'Ja@jg.com',
+      grado: 1,
+      municipio: 1,
+      asunto: 1
+  };
+
+    fetch('http://localhost:8080/api/ticket', {
+      method: 'POST',
+      body: JSON.stringify(ticket),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        alert('Ticket creado con éxito');
+      } else {
+        alert('Error al crear ticket');
+      }
+    })
+    .catch(error => {
+      alert('Error al crear ticket');
+    });
+  }
+
 }

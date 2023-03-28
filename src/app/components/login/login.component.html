@@ -1,16 +1,25 @@
+<button class="btn" (click)="home()">
+  Home
+</button>
 <div class="login-box">
   <p>Login Admin</p>
   <form>
     <div class="user-box">
-      <input  [(ngModel)]="admin.email" [ngModelOptions]="{standalone: true}" required="" name="" type="text">
+      <input required="" name="" type="text">
       <label>Email</label>
     </div>
     <div class="user-box">
       <input [(ngModel)]="admin.password" [ngModelOptions]="{standalone: true}" required="" name="" type="password">
       <label>Password</label>
     </div>
-    
-    <a (click)="validarAdmin()">
+    <div [hidden]="captcha">
+      <p>Hello potential human...</p>
+      <re-captcha (resolved)="resolved($event)" siteKey="6Ld2vTwlAAAAAOq2HOmphIqkqUM88LNbukDeX_mJ"></re-captcha>
+    </div>
+    <div [hidden]="!captcha">
+      <p>{{email}}</p>
+    </div>
+    <a href="#">
       <span></span>
       <span></span>
       <span></span>

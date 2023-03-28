@@ -1,4 +1,3 @@
-
 <app-menu-topbar></app-menu-topbar>
 <div class="container">
     <h2>Untitled Page</h2>
@@ -37,7 +36,8 @@
           <div class="mb-3">
             <label for="nombre">Nombre:</label>
             <input formControlName="nombre" name="nombre" type="text" id="f_nombre" [ngClass]="{ 'is-invalid': submitted &&
-              registerForm.controls['nombre'].errors }">
+              registerForm.controls['nombre'].errors }" 
+              [(ngModel)]="Globalticket.nombre" >
             <div *ngIf="submitted && registerForm.controls['nombre'].errors" class="text-danger">
               <div *ngIf="registerForm.controls['nombre'].errors['required']">Nombre
                 es requerido</div>
@@ -55,6 +55,13 @@
             <div *ngIf="submitted && registerForm.controls['materno'].errors" class="text-danger">
               <div *ngIf="registerForm.controls['materno'].errors['required']">A.
                 materno es requerido</div>
+            </div>
+            <label for="edad">Edad:</label>
+            <input formControlName="edad"  name="edad" type="number" value= "3" min="3" max="100" id="f_edad" [ngClass]="{ 'is-invalid': submitted &&
+              registerForm.controls['edad'].errors }">
+            <div *ngIf="submitted && registerForm.controls['edad'].errors" class="text-danger">
+              <div *ngIf="registerForm.controls['edad'].errors['required']">A.
+                edad es requerida</div>
             </div>
           </div>
           <div class="mb-3">
@@ -89,9 +96,9 @@
               alumno? </label>
             <select formControlName="interes"  name="interes" id="f_interes">
               <option value="" selected disabled hidden>Interes</option>
-              <option value="preescolar">Preescolar</option>
-              <option value="primaria">Primaria</option>
-              <option value="secundaria">Secundaria</option>
+              <option value="Preescolar">Preescolar</option>
+              <option value="Primaria">Escolar</option>
+              <option value="Secundaria">Secundaria</option>
             </select>
           </div>
           <div class="mb-3">
@@ -100,7 +107,10 @@
             <select formControlName="interes2"  name="interes2" id="f_interes2">
               <option value="" selected disabled hidden>Municipio</option>
               <option>Saltillo</option>
+              <option>Monterrey</option>
               <option>Arteaga</option>
+              <option>Ramos</option>
+              <option>Parras</option>
             </select>
           </div>
           <div class="mb-3">
@@ -108,23 +118,16 @@
             <select formControlName="interes3"  name="interes3" id="f_interes3">
               <option value="" selected disabled hidden>Interes</option>
               <option>Incripción</option>
-              <option>Reinscripción</option>
+              <option>Recursar</option>
+              <option>Baja</option>
+              <option>Constancia</option>
             </select>
           </div>
           <div class="d-flex justify-content-center  form-group">
             <input type="submit" value="Generar Turno">
           </div>
         </form>
-      </div>
-      <div >
-        <!-- <div class="pseudo-img"></div> -->
-        <div class="d-flex justify-content-center">
-          <img  src="../assets/img/codigoBarras.jpg" alt="">
-        </div>
-        <div class="d-flex justify-content-end">
-          <img src="../assets/img/qr.jpg" alt="">
-        </div>
-      </div>
+      </div>      
     </fieldset>
   </div>
   
