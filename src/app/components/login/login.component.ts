@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { RecaptchaComponent } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-login',
@@ -10,27 +11,25 @@ export class LoginComponent {
   captcha: string;
   email: string;
 
- res: any;
+  res: any;
   admin = {
     email: "",
     password: ""
   }
- datosIncorrectos = false;
+  datosIncorrectos = false;
 
-  constructor( private router: Router){
+  constructor(private router: Router) {
     this.captcha = '';
     this.email = 'Secret@email';
   }
   ngOnInit(): void {
-
   }
-    resolved(captchaResponse: string) {
-      this.captcha = captchaResponse;
-      console.log('resolved captcha with response:' + this.captcha);
+  resolved(captchaResponse: string) {
+    this.captcha = captchaResponse;
+    console.log('resolved captcha with response:' + this.captcha);
+  }
 
-    }
-
-async validarAdmin() {
+  async validarAdmin() {
     let url = "http://localhost:8080/api/admin/";
     let data = {
       method: "GET",
@@ -59,7 +58,7 @@ async validarAdmin() {
       this.datosIncorrectos = false;
     }, 3000);
   }
-  home(){
+  home() {
     this.router.navigateByUrl('/home');
   }
 }
