@@ -8,11 +8,24 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class InterAdminComponent {
   title = 'tarea-angular';
+  
+  res: any;
+  admin = {
+    email: "",
+    password: ""
+  }
+  
   registerForm !: FormGroup
+  searchForm !: FormGroup
   submitted = false;
   constructor(private formBuilder: FormBuilder) {
   }
   ngOnInit() {
+    this.searchForm = this.formBuilder.group({
+      folio: ['', Validators.required],
+      curpSch:['',Validators.required],
+    });
+
     this.registerForm = this.formBuilder.group({
       fullname: ['', Validators.required],
       curp: ['', Validators.required],
@@ -36,6 +49,7 @@ export class InterAdminComponent {
     if (this.registerForm.invalid) {
       this.validar_aspirante();
     }else {
+      //let url = "http://localhost:8080/api/ticket/";
       alert("SUCCESS")
 
     }
@@ -56,8 +70,7 @@ export class InterAdminComponent {
   
     const telefonoRegex = /^[0-9]{10}$/;
     const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const curpRegex = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/;
-
+    const curpRegex = /^[a-zA-Z]{4}(\d{6})(([a-zA-Z]){6})(\d{2})?$/;
   
     if (fullname.length < 10) {
       alert('El campo de nombre completo debe contener al menos 10 caracteres');
@@ -83,13 +96,14 @@ export class InterAdminComponent {
     else if (!correoRegex.test(correo)) {
       alert('El campo de correo electrónico debe tener un formato válido');
     }
-    else if (asunto === '') {
+    else if (asunto == '') {
       alert('Debe seleccionar una opción para el campo de asunto');
+      console.log(asunto)
     }
-    else if (municipio === '') {
+    else if (municipio == '') {
       alert('Debe seleccionar una opción para el nivel');
     }
-    else if (nivel === '') {
+    else if (nivel == '') {
       alert('Debe seleccionar una opción para el municipio');
     }
     else {
@@ -97,19 +111,29 @@ export class InterAdminComponent {
     }
   }
 
-  Busqueda(){
+  async Busqueda(){
+    const id_ticket = this.searchForm.controls['folio'].value;
+    const curp = this.searchForm.controls['curpSch'].value;
+    let url = "http://localhost:8080/api/ticket/"+id_ticket+"/"+curp;
+    let data = {
+      method: "GET",
+      headers: { "Content-type": "application/json" }
+    }
+    
+    const req = await fetch(url, data);
+    this.res = await req.json();
+    console.log(this.res);
+    alert(JSON.stringify(this.res));
   }
-  
+
   Agregar(){
-
+    alert("Agregando?")
   }
-
   Editar(){
-
+    alert("editando");
   }
 
   Eliminar(){
-
+    alert("Eliminando");
   }
-
 }
