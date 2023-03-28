@@ -122,8 +122,9 @@
                                 <label for="">Municipio donde desea estudiar el alumno:</label>
                         </div>
                         <div class="col-30">
-                                <select formControlName="municipio" name="municipio">
-                                        <option value="" selected disabled hidden>Seleccione el Municipio</option>
+                                <select  formControlName="municipio" name="municipio">
+                                        <option value="" selected disabled hidden>Selecciona un municipio</option>
+                                        <!--<option value="" *ngFor = "let municipio of resultadoMunicipio;">{{municipio.name}}</option>-->
                                 </select>
                         </div>
                 </div>
