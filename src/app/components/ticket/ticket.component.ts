@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ticket',
@@ -11,8 +12,8 @@ export class TicketComponent {
 
   registerForm !: FormGroup
   submitted = false;
-  constructor(private formBuilder: FormBuilder) {
-  }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
+
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       nombreCompleto: ['', Validators.required],
@@ -50,6 +51,7 @@ export class TicketComponent {
     const nombre = this.registerForm.controls['nombre'].value;
     const paterno = this.registerForm.controls['paterno'].value;
     const materno = this.registerForm.controls['materno'].value;
+    const edad = this.registerForm.controls['materno'].value;
     const interes = this.registerForm.controls['interes'].value;
     const interes2 = this.registerForm.controls['interes2'].value;
     const interes3 = this.registerForm.controls['interes3'].value;
@@ -73,6 +75,9 @@ export class TicketComponent {
     }
     else if (materno.length < 5) {
       alert('El campo de apellido materno debe contener al menos 5 caracteres');
+    }
+    else if (edad.length < 0) {
+      alert('El campo de apellido edad debe ser mayor a cero');
     }
     else if (!telefonoRegex.test(telefono)) {
       alert('El campo de teléfono debe tener 10 dígitos numéricos');
