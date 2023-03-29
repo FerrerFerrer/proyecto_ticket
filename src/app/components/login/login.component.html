@@ -12,12 +12,14 @@
       <input [(ngModel)]="admin.password" [ngModelOptions]="{standalone: true}" required="" name="" type="password">
       <label>Password</label>
     </div>
-    <div [hidden]="captcha">
-      <p>Hello potential human...</p>
-      <re-captcha (resolved)="resolved($event)" siteKey="6Ld2vTwlAAAAAOq2HOmphIqkqUM88LNbukDeX_mJ"></re-captcha>
+    <!-- <div id="captcha" [hidden]="captcha">
+      <re-captcha  (resolved)="resolved($event)" siteKey="6Ld2vTwlAAAAAOq2HOmphIqkqUM88LNbukDeX_mJ"></re-captcha>
     </div>
-    <div [hidden]="!captcha">
+    <div [hidden]="!captcha" >
       <p>{{email}}</p>
+    </div> -->
+    <div id="captcha">
+      <ngx-recaptcha2 #captchaElem [siteKey]="sitekey"> </ngx-recaptcha2>
     </div>
     <a href="#">
       <span></span>
