@@ -1,137 +1,136 @@
 <app-menu-topbar></app-menu-topbar>
 <div class="container">
-    <h2>Untitled Page</h2>
-    <fieldset>
-      <div>
-        <img id="sup1" align="left" src="../assets/img/se.jpg" alt="logoSecretaria">
-        <!-- <img id="sup2" align="right" src="../assets/img/numero.jpg" alt="imagen
+  <h2>Untitled Page</h2>
+  <fieldset>
+    <div>
+      <img id="sup1" align="left" src="../assets/img/se.jpg" alt="logoSecretaria">
+      <!-- <img id="sup2" align="right" src="../assets/img/numero.jpg" alt="imagen
           turno"> -->
-      </div>
-      <div class="row title">
-        <h1 class="d-flex justify-content-center"> Ticket de Turno </h1>
-      </div>
-      <div class="container">
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
-            <!-- <div class="mb-3"> -->
-            <label class="form-label" for="nombreCompleto">Nombre completo de quien realizará el trámite:</label>
-            <input class="form-text" formControlName="nombreCompleto" name="nombreCompleto" type="text"
-              id="f_nombreCompleto" [ngClass]="{ 'is-invalid': submitted && registerForm.controls['nombreCompleto'].errors }">
-            <div *ngIf="submitted && registerForm.controls['nombreCompleto'].errors" class="text-danger">
-              <div *ngIf="registerForm.controls['nombreCompleto'].errors['required']">Nombre completo por favor</div>
-            </div>
-  
-            <label for="curp">CURP:</label>
-            <input formControlName="curp"  name="curp" type="text" id="f_curp" minlength="18"
-              maxlength="18" [ngClass]="{ 'is-invalid': submitted &&
+    </div>
+    <div class="row title">
+      <h1 class="d-flex justify-content-center"> Ticket de Turno </h1>
+    </div>
+    <div class="form-group">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <!-- <div class="mb-3"> -->
+          <label class="form-label" for="nombreCompleto">Nombre completo de quien realizará el trámite:</label>
+          <input class="form-control"  formControlName="nombreCompleto" name="nombreCompleto" type="text"
+            id="f_nombreCompleto"
+            [ngClass]="{ 'is-invalid': submitted && registerForm.controls['nombreCompleto'].errors }">
+          <div *ngIf="submitted && registerForm.controls['nombreCompleto'].errors" class="text-danger">
+            <div *ngIf="registerForm.controls['nombreCompleto'].errors['required']">Nombre completo por favor</div>
+          </div>
+
+          <label for="curp">CURP:</label>
+          <input class="form-control" formControlName="curp" name="curp" type="text" id="f_curp" minlength="18" maxlength="18" [ngClass]="{ 'is-invalid': submitted &&
               registerForm.controls['curp'].errors }">
-            <div *ngIf="submitted && registerForm.controls['curp'].errors" class="text-danger">
-              <div *ngIf="registerForm.controls['curp'].errors['required']">Curp
-                es requerido</div>
-            </div>
-            <pre id="resultado"></pre>
-            <!-- <pre id="resultado"></pre> -->
+          <div *ngIf="submitted && registerForm.controls['curp'].errors" class="text-danger">
+            <div *ngIf="registerForm.controls['curp'].errors['required']">Curp
+              es requerido</div>
           </div>
-  
-          <div class="mb-3">
-            <label for="nombre">Nombre:</label>
-            <input formControlName="nombre" name="nombre" type="text" id="f_nombre" [ngClass]="{ 'is-invalid': submitted &&
-              registerForm.controls['nombre'].errors }" 
-              [(ngModel)]="Globalticket.nombre" >
-            <div *ngIf="submitted && registerForm.controls['nombre'].errors" class="text-danger">
-              <div *ngIf="registerForm.controls['nombre'].errors['required']">Nombre
-                es requerido</div>
-            </div>
-            <label for="paterno">Paterno:</label>
-            <input formControlName="paterno"  name="paterno" type="text" id="f_paterno" [ngClass]="{ 'is-invalid': submitted &&
+          <pre id="resultado"></pre>
+          <!-- <pre id="resultado"></pre> -->
+        </div>
+
+        <div class="mb-3">
+          <label for="nombre">Nombre:</label>
+          <input class="form-control" formControlName="nombre" name="nombre" type="text" id="f_nombre" [ngClass]="{ 'is-invalid': submitted &&
+              registerForm.controls['nombre'].errors }" [(ngModel)]="Globalticket.nombre">
+          <div *ngIf="submitted && registerForm.controls['nombre'].errors" class="text-danger">
+            <div *ngIf="registerForm.controls['nombre'].errors['required']">Nombre
+              es requerido</div>
+          </div>
+          <label for="paterno">Paterno:</label>
+          <input class="form-control" formControlName="paterno" name="paterno" type="text" id="f_paterno" [ngClass]="{ 'is-invalid': submitted &&
               registerForm.controls['paterno'].errors }">
-            <div *ngIf="submitted && registerForm.controls['paterno'].errors" class="text-danger">
-              <div *ngIf="registerForm.controls['paterno'].errors['required']">A.
-                paterno es requerido</div>
-            </div>
-            <label for="materno">Materno:</label>
-            <input formControlName="materno"  name="materno" type="text" id="f_materno" [ngClass]="{ 'is-invalid': submitted &&
+          <div *ngIf="submitted && registerForm.controls['paterno'].errors" class="text-danger">
+            <div *ngIf="registerForm.controls['paterno'].errors['required']">A.
+              paterno es requerido</div>
+          </div>
+          <label for="materno">Materno:</label>
+          <input class="form-control" formControlName="materno" name="materno" type="text" id="f_materno" [ngClass]="{ 'is-invalid': submitted &&
               registerForm.controls['materno'].errors }">
-            <div *ngIf="submitted && registerForm.controls['materno'].errors" class="text-danger">
-              <div *ngIf="registerForm.controls['materno'].errors['required']">A.
-                materno es requerido</div>
-            </div>
-            <label for="edad">Edad:</label>
-            <input formControlName="edad"  name="edad" type="number" value= "3" min="3" max="100" id="f_edad" [ngClass]="{ 'is-invalid': submitted &&
+          <div *ngIf="submitted && registerForm.controls['materno'].errors" class="text-danger">
+            <div *ngIf="registerForm.controls['materno'].errors['required']">A.
+              materno es requerido</div>
+          </div>
+          <label for="edad">Edad:</label>
+          <input class="form-control" formControlName="edad" name="edad" type="number" value="3" min="3" max="100" id="f_edad" [ngClass]="{ 'is-invalid': submitted &&
               registerForm.controls['edad'].errors }">
-            <div *ngIf="submitted && registerForm.controls['edad'].errors" class="text-danger">
-              <div *ngIf="registerForm.controls['edad'].errors['required']">A.
-                edad es requerida</div>
-            </div>
+          <div *ngIf="submitted && registerForm.controls['edad'].errors" class="text-danger">
+            <div *ngIf="registerForm.controls['edad'].errors['required']">A.
+              edad es requerida</div>
           </div>
-          <div class="mb-3">
-            <label for="telefono">Telefono:</label>
-            <input formControlName="telefono"  name="telefono" type="text" minlength="10"
-              maxlength="10" id="f_telefono" [ngClass]="{ 'is-invalid': submitted &&
+        </div>
+        <div class="mb-3">
+          <label for="telefono">Telefono:</label>
+          <input class="form-control" formControlName="telefono" name="telefono" type="text" minlength="10" maxlength="10" id="f_telefono"
+            [ngClass]="{ 'is-invalid': submitted &&
               registerForm.controls['telefono'].errors }">
-            <div *ngIf="submitted && registerForm.controls['telefono'].errors" class="text-danger">
-              <div *ngIf="registerForm.controls['telefono'].errors['required']">Telefono
-                es requerido</div>
-            </div>
-            <label for="celular">Celular:</label>
-            <input formControlName="celular"  name="celular" type="text" minlength="10" maxlength="10"
-              id="f_celular" [ngClass]="{ 'is-invalid': submitted &&
+          <div *ngIf="submitted && registerForm.controls['telefono'].errors" class="text-danger">
+            <div *ngIf="registerForm.controls['telefono'].errors['required']">Telefono
+              es requerido</div>
+          </div>
+          <label for="celular">Celular:</label>
+          <input  class="form-control" formControlName="celular" name="celular" type="text" minlength="10" maxlength="10" id="f_celular"
+            [ngClass]="{ 'is-invalid': submitted &&
               registerForm.controls['celular'].errors }">
-            <div *ngIf="submitted && registerForm.controls['celular'].errors" class="text-danger">
-              <div *ngIf="registerForm.controls['celular'].errors['required']">Celular
-                es requerido</div>
-            </div>
-            <label for="correo">Correo:</label>
-            <input formControlName="correo"  name="correo" type="email" id="f_correo" [ngClass]="{ 'is-invalid': submitted &&
+          <div *ngIf="submitted && registerForm.controls['celular'].errors" class="text-danger">
+            <div *ngIf="registerForm.controls['celular'].errors['required']">Celular
+              es requerido</div>
+          </div>
+          <label for="correo">Correo:</label>
+          <input class="form-control" formControlName="correo" name="correo" type="email" id="f_correo" [ngClass]="{ 'is-invalid': submitted &&
               registerForm.controls['correo'].errors }">
-            <div *ngIf="submitted && registerForm.controls['correo'].errors" class="text-danger">
-              <div *ngIf="registerForm.controls['correo'].errors['required']">Correo
-                es requerido</div>
-              <div *ngIf="registerForm.controls['correo'].errors['email']">Correo
-                no valido</div>
-            </div>
+          <div *ngIf="submitted && registerForm.controls['correo'].errors" class="text-danger">
+            <div *ngIf="registerForm.controls['correo'].errors['required']">Correo
+              es requerido</div>
+            <div *ngIf="registerForm.controls['correo'].errors['email']">Correo
+              no valido</div>
           </div>
-          <div class="mb-3">
-            <label for="interes">¿Nivel al que desea ingresar o que ya cursa el
-              alumno? </label>
-            <select formControlName="interes"  name="interes" id="f_interes">
-              <option value="" selected disabled hidden>Interes</option>
-              <option value="Preescolar">Preescolar</option>
-              <option value="Primaria">Escolar</option>
-              <option value="Secundaria">Secundaria</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="interes2">Municipio donde desea estudie el alumno:
-            </label>
-            <select formControlName="interes2"  name="interes2" id="f_interes2">
-              <option value="" selected disabled hidden>Municipio</option>
-              <option>Saltillo</option>
-              <option>Monterrey</option>
-              <option>Arteaga</option>
-              <option>Ramos</option>
-              <option>Parras</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="interes3">Seleccione el asunto que va a tratar: </label>
-            <select formControlName="interes3"  name="interes3" id="f_interes3">
-              <option value="" selected disabled hidden>Interes</option>
-              <option>Incripción</option>
-              <option>Recursar</option>
-              <option>Baja</option>
-              <option>Constancia</option>
-            </select>
-          </div>
-          <div class="d-flex justify-content-center  form-group">
-            <input type="submit" value="Generar Turno">
-          </div>
-        </form>
-      </div>      
-    </fieldset>
-  </div>
-  
-  <!-- 
+        </div>
+        <div class="mb-3">
+          <label for="interes">¿Nivel al que desea ingresar o que ya cursa el
+            alumno? </label>
+          <select formControlName="interes" name="interes" id="f_interes">
+            <option value="" selected disabled hidden>Interes</option>
+            <option value="Preescolar">Preescolar</option>
+            <option value="Primaria">Escolar</option>
+            <option value="Secundaria">Secundaria</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="interes2">Municipio donde desea estudie el alumno:
+          </label>
+          <select formControlName="interes2" name="interes2" id="f_interes2">
+            <option value="" selected disabled hidden>Municipio</option>
+            <option>Saltillo</option>
+            <option>Monterrey</option>
+            <option>Arteaga</option>
+            <option>Ramos</option>
+            <option>Parras</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="interes3">Seleccione el asunto que va a tratar: </label>
+          <select formControlName="interes3" name="interes3" id="f_interes3">
+            <option value="" selected disabled hidden>Interes</option>
+            <option>Incripción</option>
+            <option>Recursar</option>
+            <option>Baja</option>
+            <option>Constancia</option>
+          </select>
+        </div>
+        <div class="d-flex justify-content-center  form-group">
+          <input type="submit" value="Generar Turno">
+        </div>
+      </form>
+    </div>
+  </fieldset>
+</div>
+
+<!-- 
   ───────────────────────────────────────────────────────────────────────────────────────────────────────
   ─██████████████─██████████████─████████████████───████████████████───██████████████─████████████████───
   ─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░░░██───██░░░░░░░░░░░░██───██░░░░░░░░░░██─██░░░░░░░░░░░░██───

@@ -11,6 +11,8 @@ export class LoginComponent {
   captcha: string;
   email: string;
 
+  sitekey = "6Ld2vTwlAAAAAOq2HOmphIqkqUM88LNbukDeX_mJ";
+
   res: any;
   admin = {
     email: "",

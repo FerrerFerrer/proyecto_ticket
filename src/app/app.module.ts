@@ -11,6 +11,7 @@ import { InterAdminComponent } from './components/inter-admin/inter-admin.compon
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RecaptchaModule, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RecaptchaModule, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    RecaptchaModule
+    RecaptchaModule,
+    NgxCaptchaModule
   ],
   providers: [{ 
     provide: RECAPTCHA_SETTINGS,
