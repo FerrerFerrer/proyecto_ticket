@@ -113,12 +113,19 @@ export class InterAdminComponent {
   }
 
   async Busqueda(){
-    var folio = this.searchForm.controls['folio'].value;
-    var curp = this.searchForm.controls['curpSch'].value;
-    console.log(curp, folio);
-    this._rutas.consultarTicket(curp,folio).subscribe((data) =>{
+    var req = {
+      id_ticket_muni: this.searchForm.controls['folio'].value,
+      curp: this.searchForm.controls['curpSch'].value
+    }
+
+    this._rutas.mostrarTickets().subscribe((data) =>{
       if(data){
-        alert("El ticket es: " +data);
+        for(let i of data){
+          if(i.id_ticket_muni == req.id_ticket_muni && i.curp == req.curp){
+            alert(JSON.stringify(i));
+            break;
+          }
+        }
       }},
       (error) =>{
         alert("No existe el ticket");
