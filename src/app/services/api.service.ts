@@ -6,6 +6,6 @@ import { Injectable } from '@angular/core';
 export class ApiService {
 
 
-  public API_URI ='http://localhost/api/';
+  public API_URI ='http://localhost:8080/api/';
   constructor() { }
 }

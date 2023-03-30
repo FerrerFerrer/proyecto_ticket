@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +29,8 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     ReactiveFormsModule,
     AppRoutingModule,
     RecaptchaModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    HttpClientModule
   ],
   providers: [{ 
     provide: RECAPTCHA_SETTINGS,
