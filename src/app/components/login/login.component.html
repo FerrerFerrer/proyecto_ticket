@@ -28,20 +28,7 @@
 
   </div>
     
-    <div [hidden]="captcha">
-      <p>Hello potential human...</p>
-      <re-captcha (resolved)="resolved($event)" siteKey="6Ld2vTwlAAAAAOq2HOmphIqkqUM88LNbukDeX_mJ"></re-captcha>
-    </div>
-    <div [hidden]="!captcha">
-      <p>{{email}}</p>
-    </div>
-    <a href="#">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      Submit
-    </a>
+    
   </form>
   <div *ngIf="datosIncorrectos" class="alert alert-warning" role="alert">
     Datos incorrectos
