@@ -1,6 +1,7 @@
-import { Component, Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import axios from 'axios';
+import { RoutesService } from 'src/app/services/routes.service';
+
 @Component({
   selector: 'app-inter-admin',
   templateUrl: './inter-admin.component.html',
@@ -10,10 +11,15 @@ export class InterAdminComponent {
   title = 'tarea-angular';
   id = 0
   
+  busq = {
+    email: "",
+    password: ""
+  }
+
   registerForm !: FormGroup
   searchForm !: FormGroup
   submitted = false;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private _rutas: RoutesService) {
   }
   ngOnInit() {
     this.searchForm = this.formBuilder.group({
@@ -106,7 +112,18 @@ export class InterAdminComponent {
     }
   }
 
-  Busqueda(){
+  async Busqueda(){
+    var folio = this.searchForm.controls['folio'].value;
+    var curp = this.searchForm.controls['curpSch'].value;
+    console.log(curp, folio);
+    this._rutas.consultarTicket(curp,folio).subscribe((data) =>{
+      if(data){
+        alert("El ticket es: " +data);
+      }},
+      (error) =>{
+        alert("No existe el ticket");
+      }
+    );
   }
 
   Agregar(){
