@@ -7,11 +7,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 
-  export class HomeComponent {
-    constructor(private router: Router) {
-    }
-  
-    hacerticket() {
-      this.router.navigateByUrl('/ticket')
-}
+export class HomeComponent {
+  buscar = {curp:"",turno:""}
+  constructor(private router: Router) {
   }
+
+  hacerticket() {
+    this.router.navigateByUrl('/ticket')
+    
+
+  }
+  validarTurno() {
+    
+    
+  }
+
+}
