@@ -1,2 +1,21 @@
-
 <app-menu-topbar></app-menu-topbar>
+<div class="form">
+    <label for="curp">Curp</label>
+    <input type="text" name="curp" class="form-control" [(ngModel)]="buscar.curp">
+
+    <label for="Numerodeturno">Numero de Turno</label>
+    <input type="number" name="Numerodeturno" class="form-control" [(ngModel)]="buscar.turno">
+    <button (click)="validarTurno()">
+        <p>Buscar</p>
+    </button>
+
+
+
+</div>
+
+<div>
+
+    <button (click)="hacerticket()">
+        <p>Crear Ticket</p>
+    </button>
+</div>
