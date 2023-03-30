@@ -11,9 +11,19 @@ export class InterAdminComponent {
   title = 'tarea-angular';
   id = 0
   
-  busq = {
-    email: "",
-    password: ""
+  valores = {
+    nombre_completo: "",
+    curp: "",
+    nombre: "",
+    paterno: "",
+    materno: "",
+    telefono: "",
+    celular: "",
+    correo: "",
+    nivel: "",
+    municipio: "",
+    asunto: "",
+    estatus: "",
   }
 
   registerForm !: FormGroup
@@ -119,20 +129,41 @@ export class InterAdminComponent {
     }
 
     this._rutas.mostrarTickets().subscribe((data) =>{
+      let stado = 0
       if(data){
         for(let i of data){
           if(i.id_ticket_muni == req.id_ticket_muni && i.curp == req.curp){
-            alert(JSON.stringify(i));
+            alert("Cargando ticket.");
+            stado = 1;
+            this.id = i.id_ticket;
+            this.load(i);
             break;
           }
         }
+        if(stado != 1){
+          alert("No existe el ticket.")
+        }
       }},
       (error) =>{
-        alert("No existe el ticket");
+        alert("error al conectar con la db");
       }
     );
   }
-
+  async load(data: any){
+    var cont = data;
+    this.valores.nombre_completo = cont.nombre_completo;
+    this.valores.curp = cont.curp;
+    this.valores.nombre = cont.nombre;
+    this.valores.paterno = cont.paterno;
+    this.valores.materno = cont.materno;
+    this.valores.telefono = cont.telefono;
+    this.valores.celular = cont.celular;
+    this.valores.correo = cont.correo;
+    this.valores.nivel = cont.nivel;
+    this.valores.municipio = cont. municipio;
+    this.valores.asunto = cont.asunto;
+    this.valores.estatus = cont.status;
+  }
   Agregar(){
   }
 
