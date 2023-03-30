@@ -10,10 +10,20 @@ import { RoutesService } from 'src/app/services/routes.service';
 export class InterAdminComponent {
   title = 'tarea-angular';
   id = 0
-  
-  busq = {
-    email: "",
-    password: ""
+
+  valores = {
+    nombre_completo: "",
+    curp: "",
+    nombre: "",
+    paterno: "",
+    materno: "",
+    telefono: "",
+    celular: "",
+    correo: "",
+    nivel: "",
+    municipio: "",
+    asunto: "",
+    estatus: "",
   }
 
   registerForm !: FormGroup
@@ -24,7 +34,7 @@ export class InterAdminComponent {
   ngOnInit() {
     this.searchForm = this.formBuilder.group({
       folio: ['', Validators.required],
-      curpSch:['',Validators.required],
+      curpSch: ['', Validators.required],
     });
 
     this.registerForm = this.formBuilder.group({
@@ -49,13 +59,13 @@ export class InterAdminComponent {
     //detiene el proceso si la forma es invalida
     if (this.registerForm.invalid) {
       this.validar_aspirante();
-    }else {
+    } else {
       //let url = "http://localhost:8080/api/ticket/";
       alert("SUCCESS")
 
     }
   }
-  
+
   validar_aspirante() {
     const telefono = this.registerForm.controls['telefono'].value;
     const celular = this.registerForm.controls['celular'].value;
@@ -68,11 +78,11 @@ export class InterAdminComponent {
     const asunto = this.registerForm.controls['asunto'].value;
     const municipio = this.registerForm.controls['municipio'].value;
     const nivel = this.registerForm.controls['nivel'].value;
-  
+
     const telefonoRegex = /^[0-9]{10}$/;
     const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const curpRegex = /^[a-zA-Z]{4}(\d{6})(([a-zA-Z]){6})(\d{2})?$/;
-  
+
     if (fullname.length < 10) {
       alert('El campo de nombre completo debe contener al menos 10 caracteres');
     }
@@ -112,26 +122,56 @@ export class InterAdminComponent {
     }
   }
 
-  async Busqueda(){
-    var folio = this.searchForm.controls['folio'].value;
-    var curp = this.searchForm.controls['curpSch'].value;
-    console.log(curp, folio);
-    this._rutas.consultarTicket(curp,folio).subscribe((data) =>{
-      if(data){
-        alert("El ticket es: " +data);
-      }},
-      (error) =>{
-        alert("No existe el ticket");
+  async Busqueda() {
+    var req = {
+      id_ticket_muni: this.searchForm.controls['folio'].value,
+      curp: this.searchForm.controls['curpSch'].value
+    }
+
+    this._rutas.mostrarTickets().subscribe((data) => {
+      let stado = 0
+      if (data) {
+        for (let i of data) {
+          if (i.id_ticket_muni == req.id_ticket_muni && i.curp == req.curp) {
+            alert("Cargando ticket.");
+            stado = 1;
+            this.id = i.id_ticket;
+            this.load(i);
+            break;
+          }
+        }
+        if (stado != 1) {
+          alert("No existe el ticket.")
+        }
+      }
+    },
+      (error) => {
+        alert("error al conectar con la db");
       }
     );
   }
-
-  Agregar(){
+  async load(data: any) {
+    var cont = data;
+    this.valores.nombre_completo = cont.nombre_completo;
+    this.valores.curp = cont.curp;
+    this.valores.nombre = cont.nombre;
+    this.valores.paterno = cont.paterno;
+    this.valores.materno = cont.materno;
+    this.valores.telefono = cont.telefono;
+    this.valores.celular = cont.celular;
+    this.valores.correo = cont.correo;
+    this.valores.nivel = cont.nivel;
+    this.valores.municipio = cont.municipio;
+    this.valores.asunto = cont.asunto;
+    this.valores.estatus = cont.status;
+  }
+  Agregar() {
   }
 
-  Editar(){
+  Editar() {
   }
 
-  Eliminar(){
+  Eliminar() {
+    alert("Eliminando registro.")
   }
 }
