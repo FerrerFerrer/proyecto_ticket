@@ -8,13 +8,6 @@ import axios from 'axios';
 })
 export class InterAdminComponent {
   title = 'tarea-angular';
-  
-  res: any;
-  admin = {
-    email: "",
-    password: ""
-  }
-
   id = 0
   
   registerForm !: FormGroup
@@ -113,114 +106,15 @@ export class InterAdminComponent {
     }
   }
 
-  async Busqueda(){
-    //const id_ticket = this.searchForm.controls['folio'].value;
-    //const curp = this.searchForm.controls['curpSch'].value;
-    const options = {
-      method: 'GET',
-      url: 'http://localhost:8080/api/ticket/',
-      data: {
-        id_ticket_muni: this.searchForm.controls['folio'].value,
-        curp: this.searchForm.controls['curpSch'].value
-      }
-    };
-
-    axios.request(options).then( (response) => {
-      alert(response.data);
-      console.log(response.data);
-      this.id = response.data.id_ticket;
-    }).catch(function (error) {
-      console.error(error);
-    });
-  }
-  getEdad(curp=""){
-    var año = curp.substring(4,6);
-    var mes = curp.substring(6,8);
-    var dia = curp.substring(8,10);
-    return 9;
-  }
-  
-  GetIdMuni(muni=0){
-    var id = 0
-
-    return id
+  Busqueda(){
   }
 
   Agregar(){
-    this.onSubmit();
-    const options = {
-      method: 'POST',
-      url: 'http://localhost:8080/api/ticket/',
-      data: {
-        nombre_completo: this.registerForm.controls['fullname'].value,
-        id_ticket_muni: this.GetIdMuni(this.registerForm.controls['municipio'].value),
-        nombre: this.registerForm.controls['name'].value,
-        paterno: this.registerForm.controls['paterno'].value,
-        materno: this.registerForm.controls['materno'].value,
-        curp: this.registerForm.controls['curp'].value,
-        edad: this.getEdad(this.registerForm.controls['curp'].value),
-        telefono: this.registerForm.controls['telefono'].value,
-        celular: this.registerForm.controls['celular'].value,
-        correo: this.registerForm.controls['correo'].value,
-        grado: this.registerForm.controls['nivel'].value,
-        municipio: this.registerForm.controls['municipio'].value,
-        asunto: this.registerForm.controls['asunto'].value
-      }
-    };
-
-    axios.request(options).then(function (response) {
-      alert(response.data);
-      console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
   }
 
   Editar(){
-    this.onSubmit();
-    const options = {
-      method: 'PUT',
-      url: 'http://localhost:8080/api/ticket/',
-      data: {
-        nombre_completo: this.registerForm.controls['fullname'].value,
-        id_ticket_muni: '5',
-        nombre: this.registerForm.controls['name'].value,
-        paterno: this.registerForm.controls['paterno'].value,
-        materno: this.registerForm.controls['materno'].value,
-        curp: this.registerForm.controls['curp'].value,
-        edad: this.getEdad(this.registerForm.controls['curp'].value),
-        telefono: this.registerForm.controls['telefono'].value,
-        celular: this.registerForm.controls['celular'].value,
-        correo: this.registerForm.controls['correo'].value,
-        grado: this.registerForm.controls['nivel'].value,
-        municipio: this.registerForm.controls['municipio'].value,
-        asunto: this.registerForm.controls['asunto'].value
-      }
-    };
-
-    axios.request(options).then(function (response) {
-      alert(response.data);
-      console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
   }
 
   Eliminar(){
-    this.onSubmit();
-    const options = {
-      method: 'DELETE',
-      url: 'http://localhost:8080/api/ticket/',
-      data: {
-        id_ticket: this.id
-      }
-    };
-
-    axios.request(options).then(function (response) {
-      alert(response.data);
-      console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
   }
 }
