@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { RoutesService } from 'src/app/services/routes.service';
+import jsPDF from 'jspdf';
+import * as QRCode from 'qrcode';
+
+declare var createPDF: any; // Importamos la función createPDF
 
 @Component({
   selector: 'app-ticket',
@@ -30,6 +34,7 @@ export class TicketComponent {
 
   registerForm !: FormGroup
   submitted = false;
+  creado = false;
   constructor(private formBuilder: FormBuilder, private _rutas:RoutesService) { }
 
   ngOnInit() {
@@ -56,8 +61,6 @@ export class TicketComponent {
       interes: ['', Validators.required],
       interes2: ['', Validators.required],
       interes3: ['', Validators.required],
-      // nombre: ['', [Validators.required, Validators.email]],
-      // paterno: ['', [Validators.required, Validators.minLength(5)]]
     });
   }
   onSubmit() {
@@ -68,9 +71,19 @@ export class TicketComponent {
     } else {
       if(this.editando == "no"){
         this.crear_Ticket();
+        setTimeout(() => {
+          if(this.creado === true){
+            this.crearPDF();
+          }
+      }, 3000);
       }
       else if (this.editando == "si"){
         this.editar_ticket();
+        setTimeout(() => {
+          if(this.creado === true){
+            this.crearPDF();
+          }
+      }, 3000);
       }
     }
   }
@@ -79,25 +92,23 @@ export class TicketComponent {
     const telefono = this.registerForm.controls['telefono'].value;
     const celular = this.registerForm.controls['celular'].value;
     const correo = this.registerForm.controls['correo'].value;
-    const curp = this.registerForm.controls['curp'].value;
-    // const nombreCompleto = this.registerForm.controls['nombreCompleto'].value;
-    const nombre = this.registerForm.controls['nombre'].value;
-    const paterno = this.registerForm.controls['paterno'].value;
-    const materno = this.registerForm.controls['materno'].value;
+    const curp = this.Globalticket.curp;
+    const nombreCompleto = this.Globalticket.nombre_completo;
+    const nombre = this.Globalticket.nombre;
+    const paterno = this.Globalticket.paterno;
+    const materno = this.Globalticket.materno;
     const edad = this.registerForm.controls['edad'].value;
-    const interes = this.registerForm.controls['interes'].value;
-    const interes2 = this.registerForm.controls['interes2'].value;
-    const interes3 = this.registerForm.controls['interes3'].value;
+    const interes = this.Globalticket.grado;
+    const interes2 = this.Globalticket.municipio;
+    const interes3 = this.Globalticket.asunto;
 
     const telefonoRegex = /^[0-9]{10}$/;
     const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const curpRegex = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/;
 
-
-    // if (nombreCompleto.length < 10) {
-    //   alert('El campo de nombre completo debe contener al menos 10 caracteres');
-    // }
-
+    if (nombreCompleto.length < 10) {
+      alert('El campo de nombre completo debe contener al menos 10 caracteres');
+    }
     if (!curpRegex.test(curp)) {
       alert('El campo de CURP debe tener un formato válido');
     }
@@ -120,15 +131,15 @@ export class TicketComponent {
       alert('El campo de celular debe tener 10 dígitos numéricos');
     }
     else if (!correoRegex.test(correo)) {
-      alert('El campo de correo electrónico debe tener un formato válido');
+      alert('Correo vacio o formato inválido');
     }
-    else if (interes === 'Interes') {
-      alert('Debe seleccionar una opción para el campo de "Interes"');
+    else if (interes === 0) {
+      alert('Debe seleccionar una opción para el campo de Nivel');
     }
-    else if (interes2 === 'Municipio') {
-      alert('Debe seleccionar una opción para el nivel');
+    else if (interes2 === 0) {
+      alert('Debe seleccionar una opción para el asunto');
     }
-    else if (interes3 === 'Interes') {
+    else if (interes3 === 0) {
       alert('Debe seleccionar una opción para el municipio');
     }
     else {
@@ -196,6 +207,82 @@ export class TicketComponent {
     (error)=>{
       alert("Ha ocurrido un error")
     });
-    
   }
+
+  getMayorItem(url: string): Promise<any> {
+    return fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        let maxId = 0;
+        let maxItem: any = null;
+        data.forEach((item: any) => {
+          if (item.id_ticket > maxId) {
+            maxId = item.id_ticket;
+            maxItem = item;
+          }
+        });
+
+        return maxItem;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        throw new Error('Error al obtener el ticket con el id_ticket mayor');
+      });
+  }
+  
+  crearPDF() {
+    this.getMayorItem('http://localhost:8080/api/ticket')
+      .then(ticket => {
+        const doc = new jsPDF();
+        // Configuración del estilo del título
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(20);
+        doc.setTextColor(0, 0, 0);
+        // Título
+        doc.text(`Ticket #${ticket.id_ticket}`, 20, 30);
+        // Línea separadora debajo del título
+        doc.setLineWidth(0.5);
+        doc.setDrawColor(200);
+        doc.line(20, 35, 190, 35);
+        // Configuración del estilo del resto del contenido
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 255);
+        // Contenido del ticket
+        doc.rect(10, 40, 190, 110);
+        doc.setDrawColor(128);
+        doc.setLineWidth(0.2);
+        doc.setFillColor(240, 240, 240);
+        doc.rect(11, 41, 188, 108, 'FD');
+        doc.setTextColor(0, 0, 0);
+        doc.text(`Nombre: ${ticket.nombre_completo}`, 15, 55);
+        doc.text(`CURP: ${ticket.curp}`, 15, 65);
+        doc.text(`Edad: ${ticket.edad}`, 15, 75);
+        doc.text(`Teléfono: ${ticket.telefono}`, 15, 85);
+        doc.text(`Celular: ${ticket.celular}`, 15, 95);
+        doc.text(`Correo: ${ticket.correo}`, 15, 105);
+        doc.text(`Grado: ${ticket.grado}`, 15, 115);
+        doc.text(`Municipio: ${ticket.municipio}`, 15, 125);
+        doc.text(`Asunto: ${ticket.asunto}`, 15, 135);
+        doc.text(`Estatus: ${ticket.estatus}`, 15, 145);
+        
+        const qrCanvas = document.createElement('canvas');
+        QRCode.toCanvas(qrCanvas, ticket.curp, (error) => {
+          if (error) {
+            console.error('Error al generar el código QR:', error);
+          } else {
+            const qrImg = qrCanvas.toDataURL('image/png');
+            doc.addImage(qrImg, 'PNG', 130, 60, 50, 50);
+          }
+        });
+  
+        const pdfBlob = doc.output('blob');
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+        window.open(pdfUrl, '_blank');
+      })
+      .catch(error => {
+        console.error('Error al obtener los datos del API:', error);
+      });
+  } 
+
 }

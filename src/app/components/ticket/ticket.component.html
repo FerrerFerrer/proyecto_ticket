@@ -91,7 +91,7 @@
           <label for="interes">¿Nivel al que desea ingresar o que ya cursa el
             alumno? </label>
           <select formControlName="interes" name="interes" id="f_interes">
-            <option value="" selected disabled hidden>Interes</option>
+            <option value=0 selected disabled hidden>Nivel</option>
             <option value="Preescolar">Preescolar</option>
             <option value="Primaria">Escolar</option>
             <option value="Secundaria">Secundaria</option>
@@ -101,7 +101,7 @@
           <label for="interes2">Municipio donde desea estudie el alumno:
           </label>
           <select formControlName="interes2" name="interes2" id="f_interes2" [(ngModel)]="Globalticket.municipio">
-            <option  selected disabled hidden>Municipio</option>
+            <option value=0  selected disabled hidden>Municipio</option>
             <option value="1">Saltillo</option>
             <option value="2">Monterrey</option>
             <option value="3">Arteaga</option>
@@ -112,7 +112,7 @@
         <div class="mb-3">
           <label for="interes3">Seleccione el asunto que va a tratar: </label>
           <select formControlName="interes3" name="interes3" id="f_interes3" [(ngModel)]="Globalticket.asunto">
-            <option selected disabled hidden>Interes</option>
+            <option value=0 selected disabled hidden>Asunto</option>
             <option value="1">Incripción</option>
             <option value="2">Recursar</option>
             <option value="3">Baja</option>
