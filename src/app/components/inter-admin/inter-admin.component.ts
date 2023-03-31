@@ -1,6 +1,8 @@
-import { Component, Injectable } from '@angular/core';
+import { ParseSourceSpan } from '@angular/compiler';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import axios from 'axios';
+import { RoutesService } from 'src/app/services/routes.service';
+
 @Component({
   selector: 'app-inter-admin',
   templateUrl: './inter-admin.component.html',
@@ -8,24 +10,41 @@ import axios from 'axios';
 })
 export class InterAdminComponent {
   title = 'tarea-angular';
-  
-  res: any;
-  admin = {
-    email: "",
-    password: ""
+  id = 0
+  selects = {
+    nivelValue: "Selecciona un nivel",
+    municipioValue: "Selecciona un municipio",
+    asuntoValue: "Selecciona un asunto",
+    estatusValue: "Selecciona un estatus",
   }
 
-  id = 0
-  
+  valores = {
+    id_ticket: 0,
+    id_ticket_muni: 0,
+    nombre_completo: "",
+    curp: "",
+    nombre: "",
+    paterno: "",
+    materno: "",
+    telefono: "",
+    edad:0,
+    celular: "",
+    correo: "",
+    grado: 0,
+    municipio: 0,
+    asunto: 0,
+    estatus: "",
+  }
+
   registerForm !: FormGroup
   searchForm !: FormGroup
   submitted = false;
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private _rutas: RoutesService) {
   }
   ngOnInit() {
     this.searchForm = this.formBuilder.group({
       folio: ['', Validators.required],
-      curpSch:['',Validators.required],
+      curpSch: ['', Validators.required],
     });
 
     this.registerForm = this.formBuilder.group({
@@ -50,14 +69,14 @@ export class InterAdminComponent {
     //detiene el proceso si la forma es invalida
     if (this.registerForm.invalid) {
       this.validar_aspirante();
-    }else {
+    } else {
       //let url = "http://localhost:8080/api/ticket/";
       alert("SUCCESS")
 
     }
   }
-  
-  validar_aspirante() {
+
+  async validar_aspirante() {
     const telefono = this.registerForm.controls['telefono'].value;
     const celular = this.registerForm.controls['celular'].value;
     const correo = this.registerForm.controls['correo'].value;
@@ -69,11 +88,11 @@ export class InterAdminComponent {
     const asunto = this.registerForm.controls['asunto'].value;
     const municipio = this.registerForm.controls['municipio'].value;
     const nivel = this.registerForm.controls['nivel'].value;
-  
+
     const telefonoRegex = /^[0-9]{10}$/;
     const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const curpRegex = /^[a-zA-Z]{4}(\d{6})(([a-zA-Z]){6})(\d{2})?$/;
-  
+
     if (fullname.length < 10) {
       alert('El campo de nombre completo debe contener al menos 10 caracteres');
     }
@@ -113,114 +132,117 @@ export class InterAdminComponent {
     }
   }
 
-  async Busqueda(){
-    //const id_ticket = this.searchForm.controls['folio'].value;
-    //const curp = this.searchForm.controls['curpSch'].value;
-    const options = {
-      method: 'GET',
-      url: 'http://localhost:8080/api/ticket/',
-      data: {
-        id_ticket_muni: this.searchForm.controls['folio'].value,
-        curp: this.searchForm.controls['curpSch'].value
-      }
-    };
+  async Busqueda() {
+    var req = {
+      id_ticket_muni: this.searchForm.controls['folio'].value,
+      curp: this.searchForm.controls['curpSch'].value
+    }
 
-    axios.request(options).then( (response) => {
-      alert(response.data);
-      console.log(response.data);
-      this.id = response.data.id_ticket;
-    }).catch(function (error) {
-      console.error(error);
-    });
+    this._rutas.mostrarTickets().subscribe((data) => {
+      let stado = 0
+      if (data) {
+        for (let i of data) {
+          if (i.id_ticket_muni == req.id_ticket_muni && i.curp == req.curp) {
+            alert("Cargando ticket.");
+            stado = 1;
+            this.id = i.id_ticket;
+            this.valores.id_ticket_muni = i.id_ticket_muni;
+            this.valores.edad = i.edad;
+            this.load(i);
+            break;
+          }
+        }
+        if (stado != 1) {
+          alert("No existe el ticket.")
+        }
+      }
+    },
+      (error) => {
+        alert("error al conectar con la db");
+      }
+    );
   }
-  getEdad(curp=""){
-    var año = curp.substring(4,6);
-    var mes = curp.substring(6,8);
-    var dia = curp.substring(8,10);
-    return 9;
+  async load(data: any) {
+    var cont = data;
+    console.log(JSON.stringify(data));
+    this.valores.nombre_completo = cont.nombre_completo;
+    this.valores.curp = cont.curp;
+    this.valores.nombre = cont.nombre;
+    this.valores.paterno = cont.paterno;
+    this.valores.materno = cont.materno;
+    this.valores.telefono = cont.telefono;
+    this.valores.celular = cont.celular;
+    this.valores.correo = cont.correo;
+    this.selects.nivelValue = cont.grado;
+    this.selects.municipioValue = cont.municipio;
+    this.selects.asuntoValue = cont.asunto;
+    this.selects.estatusValue = cont.estatus;
   }
   
-  GetIdMuni(muni=0){
-    var id = 0
+  async Agregar() {
+    this.valores.id_ticket_muni = 1,
+    this.valores.nombre_completo = this.registerForm.controls['fullname'].value,
+    this.valores.curp = this.registerForm.controls['curp'].value,
+    this.valores.nombre = this.registerForm.controls['name'].value,
+    this.valores.paterno = this.registerForm.controls['paterno'].value,
+    this.valores.materno = this.registerForm.controls['materno'].value,
+    this.valores.telefono = this.registerForm.controls['telefono'].value,
+    this.valores.celular = this.registerForm.controls['celular'].value,
+    this.valores.correo = this.registerForm.controls['correo'].value,
+    this.valores.grado = this.registerForm.controls['nivel'].value,
+    this.valores.municipio = this.registerForm.controls['municipio'].value,
+    this.valores.estatus = this.registerForm.controls['status'].value,
+    this.valores.asunto = this.registerForm.controls['asunto'].value,
+    this.valores.edad = 8
 
-    return id
-  }
-
-  Agregar(){
-    this.onSubmit();
-    const options = {
-      method: 'POST',
-      url: 'http://localhost:8080/api/ticket/',
-      data: {
-        nombre_completo: this.registerForm.controls['fullname'].value,
-        id_ticket_muni: this.GetIdMuni(this.registerForm.controls['municipio'].value),
-        nombre: this.registerForm.controls['name'].value,
-        paterno: this.registerForm.controls['paterno'].value,
-        materno: this.registerForm.controls['materno'].value,
-        curp: this.registerForm.controls['curp'].value,
-        edad: this.getEdad(this.registerForm.controls['curp'].value),
-        telefono: this.registerForm.controls['telefono'].value,
-        celular: this.registerForm.controls['celular'].value,
-        correo: this.registerForm.controls['correo'].value,
-        grado: this.registerForm.controls['nivel'].value,
-        municipio: this.registerForm.controls['municipio'].value,
-        asunto: this.registerForm.controls['asunto'].value
-      }
-    };
-
-    axios.request(options).then(function (response) {
-      alert(response.data);
-      console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
+    alert("Añadiendo Registro.");
+    this._rutas.crearTicket(this.valores).subscribe((data)=>{
+      alert("Se añadio el registro." +JSON.stringify(data));
+    },
+    (error)=>{
+      alert("No se pudo agregar el registro." +JSON.stringify(error));
     });
   }
 
-  Editar(){
-    this.onSubmit();
-    const options = {
-      method: 'PUT',
-      url: 'http://localhost:8080/api/ticket/',
-      data: {
-        nombre_completo: this.registerForm.controls['fullname'].value,
-        id_ticket_muni: '5',
-        nombre: this.registerForm.controls['name'].value,
-        paterno: this.registerForm.controls['paterno'].value,
-        materno: this.registerForm.controls['materno'].value,
-        curp: this.registerForm.controls['curp'].value,
-        edad: this.getEdad(this.registerForm.controls['curp'].value),
-        telefono: this.registerForm.controls['telefono'].value,
-        celular: this.registerForm.controls['celular'].value,
-        correo: this.registerForm.controls['correo'].value,
-        grado: this.registerForm.controls['nivel'].value,
-        municipio: this.registerForm.controls['municipio'].value,
-        asunto: this.registerForm.controls['asunto'].value
-      }
-    };
-
-    axios.request(options).then(function (response) {
-      alert(response.data);
-      console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
+  async Editar() {
+    this.valores.id_ticket = this.id,
+    this.valores.nombre_completo = this.registerForm.controls['fullname'].value,
+    this.valores.curp = this.registerForm.controls['curp'].value,
+    this.valores.nombre = this.registerForm.controls['name'].value,
+    this.valores.paterno = this.registerForm.controls['paterno'].value,
+    this.valores.materno = this.registerForm.controls['materno'].value,
+    this.valores.telefono = this.registerForm.controls['telefono'].value,
+    this.valores.celular = this.registerForm.controls['celular'].value,
+    this.valores.correo = this.registerForm.controls['correo'].value,
+    this.valores.grado = this.registerForm.controls['nivel'].value,
+    this.valores.municipio = this.registerForm.controls['municipio'].value,
+    this.valores.estatus = this.registerForm.controls['status'].value,
+    this.valores.asunto = this.registerForm.controls['asunto'].value,
+    console.log(this.valores)
+    alert("Actualizando Registro.");
+    this._rutas.actualizarTicket(this.valores, this.valores.id_ticket).subscribe((data)=>{
+      alert("Se actualizo el registro." +JSON.stringify(data));
+    },
+    (error)=>{
+      alert("No se pudo actualizar el registro." +JSON.stringify(error));
     });
   }
 
-  Eliminar(){
-    this.onSubmit();
-    const options = {
-      method: 'DELETE',
-      url: 'http://localhost:8080/api/ticket/',
-      data: {
-        id_ticket: this.id
-      }
-    };
-
-    axios.request(options).then(function (response) {
-      alert(response.data);
-      console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
+  async Eliminar() {
+    alert("Eliminando registro.");
+    console.log("id:" +this.id)
+    if(this.id != 0){  
+      this._rutas.borrarTicket(this.id).subscribe((data) => {
+        alert("Registro Eliminado." +JSON.stringify(data))
+      },
+        (error) => {
+          alert("error al conectar con la db"+JSON.stringify(error));
+        }
+      );
+      this.id = 0;
+    }
+    else{
+      alert("No hay nada que eliminar.");
+    }
   }
 }

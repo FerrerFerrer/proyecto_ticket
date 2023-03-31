@@ -3,32 +3,33 @@
 </button>
 <div class="login-box">
   <p>Login Admin</p>
-  <form>
+  <form [formGroup]="aFormGroup" (ngSubmit)="validarAdmin()">
     <div class="user-box">
-      <input required="" name="" type="text">
+      <input [(ngModel)]="admin.email" [ngModelOptions]="{standalone: true}" required="" name="" type="text">
       <label>Email</label>
     </div>
     <div class="user-box">
       <input [(ngModel)]="admin.password" [ngModelOptions]="{standalone: true}" required="" name="" type="password">
       <label>Password</label>
     </div>
-    <div [hidden]="captcha">
-      <p>Hello potential human...</p>
-      <re-captcha (resolved)="resolved($event)" siteKey="6Ld2vTwlAAAAAOq2HOmphIqkqUM88LNbukDeX_mJ"></re-captcha>
+    <!-- <div id="captcha" [hidden]="captcha">
+      <re-captcha  (resolved)="resolved($event)" siteKey="6Ld2vTwlAAAAAOq2HOmphIqkqUM88LNbukDeX_mJ"></re-captcha>
     </div>
-    <div [hidden]="!captcha">
+    <div [hidden]="!captcha" >
       <p>{{email}}</p>
+    </div> -->
+    <div id="captcha" >
+      <ngx-recaptcha2 formControlName="recaptcha" #captchaElem [siteKey]="sitekey" (success)="resolved($event)"> </ngx-recaptcha2>
     </div>
-    <a href="#">
+    <button type="submit" style="background-color: transparent;" href="#">
       <span></span>
       <span></span>
       <span></span>
       <span></span>
       Submit
-    </a>
+    </button>
   </form>
   <div *ngIf="datosIncorrectos" class="alert alert-warning" role="alert">
-    Datos incorrectos
+    Datos incorrectos o falta captcha
   </div>
-  <!-- <p>Don't have an account? <a href="" class="a2">Sign up!</a></p> -->
 </div>

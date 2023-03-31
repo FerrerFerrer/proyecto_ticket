@@ -18,7 +18,7 @@ export class RoutesService extends ApiService {
     return this.http.get(this.API_URI + "ticket/")
   }
 
-  consultarTicket(id_ticket: any, curp: any): Observable<any> {
+  consultarTicket(id_ticket: string, curp: string): Observable<any> {
     return this.http.get(this.API_URI + "ticket/" + id_ticket +"/" + curp)
   }
 
@@ -27,12 +27,10 @@ export class RoutesService extends ApiService {
   }
 
   borrarTicket(body: any) : Observable<any>{
-    return this.http.delete(this.API_URI + "ticket/", body)
+    return this.http.delete(this.API_URI + "ticket/" +body)
   }
 
-  actualizarTicket(body: any) : Observable<any>{
-    return this.http.put(this.API_URI + "ticket/", body)
+  actualizarTicket(body: any,id:any) : Observable<any>{
+    return this.http.put(this.API_URI + "ticket/"+id, body)
   }
-
-
 }

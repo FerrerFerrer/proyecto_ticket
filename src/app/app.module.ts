@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TicketComponent } from './components/ticket/ticket.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +11,7 @@ import { InterAdminComponent } from './components/inter-admin/inter-admin.compon
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RecaptchaModule, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { RecaptchaModule, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    RecaptchaModule
+    RecaptchaModule,
+    NgxCaptchaModule,
+    HttpClientModule
   ],
   providers: [{ 
     provide: RECAPTCHA_SETTINGS,
