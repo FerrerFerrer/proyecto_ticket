@@ -5,6 +5,7 @@ import { TicketComponent } from './components/ticket/ticket.component';
 import { InterAdminComponent } from './components/inter-admin/inter-admin.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CrudComponent } from './components/crud/crud.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'admin', component: InterAdminComponent },
   { path: 'home', component: HomeComponent },
   { path: '', component: HomeComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'crud', component: CrudComponent}
 ];
 
 @NgModule({
