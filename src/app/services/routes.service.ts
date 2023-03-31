@@ -27,7 +27,7 @@ export class RoutesService extends ApiService {
   }
 
   borrarTicket(body: any) : Observable<any>{
-    return this.http.delete(this.API_URI + "ticket/", body)
+    return this.http.delete(this.API_URI + "ticket/" +body)
   }
 
   actualizarTicket(body: any) : Observable<any>{
