@@ -1,54 +1,54 @@
 <div class="container">
-        <form name="municipio">
+        <form name="municipio" [formGroup] = "muniForm">
             <h1>Añadir municipio</h1>
             <div class="row">
                 <div class="col-2">
                     <label for="">Municipio:</label>
                 </div>
                 <div class="col-4">
-                    <input type="text" required>
+                    <input formControlName="municipio" type="text" required [(ngModel)]="muni.municipio">
                 </div>
             </div>
             <div class="row">
                 <div class="col-2">
-                    <label for="">Municipio:</label>
+                    <label for="">Estado:</label>
                 </div>
                 <div class="col-4">
-                    <input type="text" required>
+                    <input formControlName="estado" type="text" required [(ngModel)]="muni.estado">
                 </div>
             </div>
             <div class="row">
-                <button>Añadir</button>
+                <button id="mun" (click)="AltaMunicipio()">Añadir</button>
             </div>
         </form>
 
-        <form name="grado">
+        <form name="grado" [formGroup] = "gradoForm">
             <h1>Añadir Grado</h1>
             <div class="row">
                 <div class="col-2">
                     <label for="">Grado:</label>
                 </div>
                 <div class="col-4">
-                    <input type="text" required>
+                    <input type="text" formControlName="grado" type="text" required [(ngModel)]="grad.nivel">
                 </div>
             </div>
             <div class="row">
-                <button>Añadir</button>
+                <button (click)="AltaGrado()">Añadir</button>
             </div>
         </form>
 
-        <form name="asunto">
+        <form name="asunto" [formGroup] = "asuntoForm">
             <h1>Asunto</h1>
             <div class="row">
                 <div class="col-2">
                     <label for="">Asunto:</label>
                 </div>
                 <div class="col-4">
-                    <input type="text" required>
+                    <input type="text"  formControlName="asunto" type="text" required [(ngModel)]="asu.descripcion">
                 </div>
             </div>
             <div class="row">
-                <button>Añadir</button>
+                <button (click)="AltaAsunto()">Añadir</button>
             </div>
         </form>
         
