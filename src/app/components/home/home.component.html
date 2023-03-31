@@ -1,21 +1,34 @@
 <app-menu-topbar></app-menu-topbar>
-<div class="form">
-    <label for="curp">Curp</label>
-    <input type="text" name="curp" class="form-control" [(ngModel)]="buscar.curp">
+<div class="centrar" id="contenedor-principal">
+    <div class="fondo">
 
-    <label for="Numerodeturno">Numero de Turno</label>
-    <input type="number" name="Numerodeturno" class="form-control" [(ngModel)]="buscar.turno">
-    <button (click)="validarTurno()">
-        <p>Buscar</p>
-    </button>
-
-
-
-</div>
-
-<div>
-
-    <button (click)="hacerticket()">
-        <p>Crear Ticket</p>
-    </button>
+        <div id="contenedor-1">
+    
+            <div>
+                <div class="input-container">
+                    <input id="input" required="" type="text" name="curp" [(ngModel)]="buscar.curp">
+                    <label for="curp" class="label">Curp</label>
+                    <div class="underline"></div>
+                </div>
+    
+            </div>
+            <div>
+                <div class="input-container">
+                    <input id="input" required="" type="text" name="Numerodeturno" [(ngModel)]="buscar.turno">
+                    <label for="Numerodeturno" class="label">Numero de turno</label>
+                    <div class="underline"></div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="contenedor-2">
+    
+            <div >
+                <button (click)="validarTurno()">Buscar</button>
+            </div>
+            <div >
+                <button (click)="hacerticket()">Crear Ticket</button>
+            </div>
+        </div>
+    </div>
 </div>
