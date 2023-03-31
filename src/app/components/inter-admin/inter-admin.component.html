@@ -38,7 +38,7 @@
                                         <label for="fullname">Nombre completo:</label>
                                 </div>
                                 <div class="col-70">
-                                        <input type="text" formControlName="fullname" name="fullname">
+                                        <input type="text" formControlName="fullname" name="fullname" [(ngModel)]="valores.nombre_completo">
                                 </div>
                         </div>
 
@@ -47,7 +47,7 @@
                                         <label for="curp">CURP:</label>
                                 </div>
                                 <div class="col-70">
-                                        <input type="text" formControlName="curp" name="curp">
+                                        <input type="text" formControlName="curp" name="curp" [(ngModel)]="valores.curp">
                                 </div>
                         </div>
                 </div>
@@ -58,7 +58,7 @@
                                         <label for="name">Nombre:</label>
                                 </div>
                                 <div class="col-70">
-                                        <input type="text" formControlName="name" name="name">
+                                        <input type="text" formControlName="name" name="name" [(ngModel)]="valores.nombre">
                                 </div>
                         </div>
                         <div class="col-30">
@@ -66,7 +66,7 @@
                                         <label for="paterno">Paterno:</label>
                                 </div>
                                 <div class="col-70">
-                                        <input type="text" formControlName="paterno" name="paterno">
+                                        <input type="text" formControlName="paterno" name="paterno" [(ngModel)]="valores.paterno">
                                 </div>
                         </div>
                         <div class="col-30">
@@ -74,7 +74,7 @@
                                         <label for="materno">Materno:</label>
                                 </div>
                                 <div class="col-70">
-                                        <input type="text" formControlName="materno" name="materno">
+                                        <input type="text" formControlName="materno" name="materno" [(ngModel)]="valores.materno">
                                 </div>
                         </div>
                 </div>
@@ -85,7 +85,7 @@
                                         <label for="telefono">Telefono:</label>
                                 </div>
                                 <div class="col-70">
-                                        <input type="text" formControlName="telefono" name="telefono">
+                                        <input type="text" formControlName="telefono" name="telefono" [(ngModel)]="valores.telefono">
                                 </div>
                         </div>
                         <div class="col-30">
@@ -93,7 +93,7 @@
                                         <label for="celular">Celular:</label>
                                 </div>
                                 <div class="col-70">
-                                        <input type="text" formControlName="celular" name="celular">
+                                        <input type="text" formControlName="celular" name="celular" [(ngModel)]="valores.celular">
                                 </div>
                         </div>
                         <div class="col-30">
@@ -101,7 +101,7 @@
                                         <label for="f_correo">Correo:</label>
                                 </div>
                                 <div class="col-70">
-                                        <input type="text" formControlName="correo" name="f_correo">
+                                        <input type="text" formControlName="correo" name="f_correo" [(ngModel)]="valores.correo">
                                 </div>
                         </div>
                 </div>
@@ -111,19 +111,11 @@
                                 <label for="f_nivel">¿Nivel al que desea ingresar o que ya cursa el alumno?</label>
                         </div>
                         <div class="col-50">
-<<<<<<< HEAD
                                 <select formControlName="nivel" name="f_nivel" [(ngModel)]="selects.nivelValue">
                                         <option value="1">Preescolar</option>
                                         <option value="2">Primaria</option>
                                         <option value="3">Secundaria</option>
-=======
 
-                                <select formControlName="nivel" name="f_nivel">
-                                        <option value="" selected disabled hidden>Seleccione el Nivel</option>
-                                        <option value="preescolar">Preescolar</option>
-                                        <option value="primaria">Primaria</option>
-                                        <option value="secundaria">Secundaria</option>
->>>>>>> e19ebb299286679f5ea0c6f7ff9e7bb8ea4f18bf
                                 </select>
                         </div>
                 </div>
@@ -134,7 +126,7 @@
                         </div>
                         <div class="col-50">
 
-                                <select  formControlName="municipio" name="f_municipio">
+                                <select  formControlName="municipio" name="f_municipio" [(ngModel)]="selects.municipioValue">
                                         <option value="" selected disabled hidden>Selecciona un municipio</option>
                                         <option value="1">Saltillo</option>
                                         <option value="2">Monterrey</option>
@@ -151,7 +143,7 @@
                         </div>
                         <div class="col-50">
 
-                                <select formControlName="asunto" name="f_asunto">
+                                <select formControlName="asunto" name="f_asunto"  [(ngModel)]="selects.asuntoValue">
                                         <option value="" selected disabled hidden>Seleccione el Asunto</option>
                                         <option value="1">Inscripcion</option>
                                         <option value="3">Recursar</option>
@@ -167,7 +159,7 @@
                         </div>
                         <div class="col-50">
 
-                                <select formControlName="status" name="f_status">
+                                <select formControlName="status" name="f_status"  [(ngModel)]="selects.estatusValue">
                                         <option value="" selected disabled hidden>Seleccione el Status</option>
                                         <option value="PENDIENTE">Pendiente</option>
                                         <option value="RESUELTO">Resuelto</option>
