@@ -19,18 +19,18 @@ export class RoutesService extends ApiService {
   }
 
   consultarTicket(id_ticket: string, curp: string): Observable<any> {
-    return this.http.get(this.API_URI + "ticket/" + id_ticket +"/" + curp)
+    return this.http.get(this.API_URI + "ticket/" + curp + "/" + id_ticket)
   }
 
   crearTicket(body: any): Observable<any> {
     return this.http.post(this.API_URI + "ticket/", body)
   }
 
-  borrarTicket(body: any) : Observable<any>{
-    return this.http.delete(this.API_URI + "ticket/" +body)
+  borrarTicket(id: any): Observable<any> {
+    return this.http.delete(this.API_URI + "ticket/" + id)
   }
 
-  actualizarTicket(body: any) : Observable<any>{
+  actualizarTicket(body: any): Observable<any> {
     return this.http.put(this.API_URI + "ticket/", body)
   }
 }

@@ -145,7 +145,10 @@ export class InterAdminComponent {
             alert("Cargando ticket.");
             stado = 1;
             this.id = i.id_ticket;
+            console.log(i);
+            
             this.load(i);
+            
             break;
           }
         }
@@ -160,6 +163,8 @@ export class InterAdminComponent {
     );
   }
   async load(data: any) {
+    console.log(data);
+    
     var cont = data;
     this.valores.nombre_completo = cont.nombre_completo;
     this.valores.curp = cont.curp;

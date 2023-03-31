@@ -10,6 +10,8 @@ import { RoutesService } from 'src/app/services/routes.service';
 
 export class HomeComponent {
   buscar = { curp: "", turno: 0 }
+
+  datosBusqueda = {}
   constructor(private router: Router, private _rutas: RoutesService) {
   }
 
@@ -24,7 +26,6 @@ export class HomeComponent {
       alert("CURP INCORRECTA!")
       return
     } else {
-      alert('CURP Correcta')
       if (this.buscar.turno < 0) {
         alert("TURNO INVALIDO!")
       }
@@ -36,15 +37,17 @@ export class HomeComponent {
   }
 
 
-  buscarTicket(curp: string, ticket: any) {
+  async buscarTicket(curp: string, ticket: any) {
     let ticketString: string = ticket;
-    this._rutas.consultarTicket(ticketString, curp).subscribe(
-      (data) => {
-        console.log(data);
-    },
-    (error) => {
+    console.log(curp, ticket)
+     this._rutas.consultarTicket(ticket, curp).subscribe(data => { });
+      // (data) => {
+      //   console.log(data);
+      // },
+      // (error) => {
 
-    })
+      // })
+      
   }
 
 }
