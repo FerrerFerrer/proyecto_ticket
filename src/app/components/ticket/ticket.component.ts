@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { RoutesService } from 'src/app/services/routes.service';
 
 @Component({
   selector: 'app-ticket',
@@ -9,8 +10,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TicketComponent {
   title = 'tarea-angular';
-
+  editando = "no";
   Globalticket = {
+    id_ticket:0,
     id_ticket_muni: 0,
     nombre_completo: "",
     nombre: "",
@@ -28,9 +30,10 @@ export class TicketComponent {
 
   registerForm !: FormGroup
   submitted = false;
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private _rutas:RoutesService) { }
 
   ngOnInit() {
+    this.editando = "si";
     let respuesta = localStorage.getItem("respuesta");
     if(respuesta == "si"){
       let valores: any = localStorage.getItem("editar");
@@ -63,7 +66,12 @@ export class TicketComponent {
     if (this.registerForm.invalid) {
       this.validar_aspirante();
     } else {
-      this.crear_Ticket();
+      if(this.editando == "no"){
+        this.crear_Ticket();
+      }
+      else if (this.editando == "si"){
+        this.editar_ticket();
+      }
     }
   }
 
@@ -164,4 +172,30 @@ export class TicketComponent {
       });
   }
 
+
+  editar_ticket(){
+    const ticket = {
+      id_ticket_muni: this.Globalticket.id_ticket_muni,
+      nombre_completo: this.Globalticket.nombre_completo,
+      nombre: this.Globalticket.nombre,
+      paterno: this.Globalticket.paterno,
+      materno: this.Globalticket.materno,
+      curp: this.Globalticket.curp,
+      edad: this.Globalticket.edad,
+      telefono: this.Globalticket.telefono,
+      celular: this.Globalticket.celular,
+      correo: this.Globalticket.correo,
+      grado: this.Globalticket.grado,
+      municipio: this.Globalticket.municipio,
+      asunto: this.Globalticket.asunto
+    };
+
+    this._rutas.actualizarTicket(ticket, this.Globalticket.id_ticket).subscribe((data)=>{
+      alert("editado exitosamente")
+    },
+    (error)=>{
+      alert("Ha ocurrido un error")
+    });
+    
+  }
 }
