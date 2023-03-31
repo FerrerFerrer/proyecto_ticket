@@ -1,2 +1,16 @@
 <app-menu-topbar></app-menu-topbar>
 <h1>Dashboard</h1>
+
+<ngx-charts-bar-vertical 
+    [view]="[1000,300]"
+    [results]="saleData"
+    [xAxisLabel]="'Municipios'"
+    [legendTitle]="'Gente que genero ticket'"
+    [yAxisLabel]="'Gentes'"
+    [legend]="true"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [gradient]="true">
+</ngx-charts-bar-vertical>

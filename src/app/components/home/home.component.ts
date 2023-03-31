@@ -49,9 +49,7 @@ export class HomeComponent {
       }
       else {
         console.log("hola");
-        
         this.buscarTicket(this.buscar.curp, this.buscar.turno);
-
       }
     }
 
