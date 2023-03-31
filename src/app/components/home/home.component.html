@@ -1,21 +1,40 @@
 <app-menu-topbar></app-menu-topbar>
-<div class="form">
-    <label for="curp">Curp</label>
-    <input type="text" name="curp" class="form-control" [(ngModel)]="buscar.curp">
-
-    <label for="Numerodeturno">Numero de Turno</label>
-    <input type="number" name="Numerodeturno" class="form-control" [(ngModel)]="buscar.turno">
-    <button (click)="validarTurno()">
-        <p>Buscar</p>
-    </button>
-
-
-
-</div>
-
+<h1 class="d-flex justify-content-center">Bienvenido a TicketMaster.com</h1>
 <div>
+    <div class="centrar" id="contenedor-principal">
+        <div class="fondo">
 
-    <button (click)="hacerticket()">
-        <p>Crear Ticket</p>
-    </button>
+            <div id="contenedor-1">
+
+                <div>
+                    <div class="input-container">
+                        <input id="input" required="" type="text" name="curp" [(ngModel)]="buscar.curp">
+                        <label for="curp" class="label">Curp</label>
+                        <div class="underline"></div>
+                    </div>
+
+                </div>
+                <div>
+                    <div class="input-container">
+                        <input id="input" required="" type="text" name="Numerodeturno" [(ngModel)]="buscar.turno">
+                        <label for="Numerodeturno" class="label">Numero de turno</label>
+                        <div class="underline"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contenedor-2">
+
+                <div>
+                    <button (click)="validarTurno()">Buscar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="redirijir centrar">
+        <h2 class="titleRegistro">¿Quieres crear un registro?</h2>
+        <div>
+            <button class="d-flex justify-content-end crearBtn" (click)="hacerticket()">Crear Ticket</button>
+        </div>
+    </div>
 </div>
