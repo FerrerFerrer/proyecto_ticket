@@ -28,6 +28,8 @@ export class HomeComponent {
     paterno:"",
     telefono:0,
   };
+
+
   datosBusqueda = {}
   constructor(private router: Router, private _rutas: RoutesService) {
   }
@@ -46,8 +48,8 @@ export class HomeComponent {
         alert("TURNO INVALIDO!")
       }
       else {
+        console.log("hola");
         this.buscarTicket(this.buscar.curp, this.buscar.turno);
-
       }
     }
 
@@ -55,10 +57,10 @@ export class HomeComponent {
 
 
   async buscarTicket(curp: string, ticket: any) {
-    let ticketString: string = ticket;
+    
     this._rutas.consultarTicket(ticket, curp).subscribe(
       (data) => {
-        // console.log(data[0]);
+        console.log(data[0]);
         this.body = data[0];
         localStorage.setItem("editar", JSON.stringify(data[0]))
       },

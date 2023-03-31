@@ -12,6 +12,10 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RecaptchaModule, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { CrudComponent } from './components/crud/crud.component';
+import { NgxChartsModule }from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +25,8 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     MenuTopbarComponent,
     InterAdminComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    CrudComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +35,9 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     AppRoutingModule,
     RecaptchaModule,
     NgxCaptchaModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [{ 
     provide: RECAPTCHA_SETTINGS,
