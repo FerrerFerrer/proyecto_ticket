@@ -33,4 +33,5 @@ export class RoutesService extends ApiService {
   actualizarTicket(body: any,id:any) : Observable<any>{
     return this.http.put(this.API_URI + "ticket/"+id, body)
   }
+
 }
