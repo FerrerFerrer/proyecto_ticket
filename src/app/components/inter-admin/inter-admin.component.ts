@@ -19,6 +19,7 @@ export class InterAdminComponent {
   }
 
   valores = {
+    id_ticket: 0,
     id_ticket_muni: 0,
     nombre_completo: "",
     curp: "",
@@ -145,10 +146,9 @@ export class InterAdminComponent {
             alert("Cargando ticket.");
             stado = 1;
             this.id = i.id_ticket;
-            console.log(i);
-            
+            this.valores.id_ticket_muni = i.id_ticket_muni;
+            this.valores.edad = i.edad;
             this.load(i);
-            
             break;
           }
         }
@@ -163,9 +163,8 @@ export class InterAdminComponent {
     );
   }
   async load(data: any) {
-    console.log(data);
-    
     var cont = data;
+    console.log(JSON.stringify(data));
     this.valores.nombre_completo = cont.nombre_completo;
     this.valores.curp = cont.curp;
     this.valores.nombre = cont.nombre;
@@ -174,11 +173,10 @@ export class InterAdminComponent {
     this.valores.telefono = cont.telefono;
     this.valores.celular = cont.celular;
     this.valores.correo = cont.correo;
-    this.selects.nivelValue = cont.nivel;
+    this.selects.nivelValue = cont.grado;
     this.selects.municipioValue = cont.municipio;
     this.selects.asuntoValue = cont.asunto;
-    this.selects.estatusValue = cont.status;
-    console.log(this.selects.nivelValue);
+    this.selects.estatusValue = cont.estatus;
   }
   
   async Agregar() {
@@ -206,7 +204,28 @@ export class InterAdminComponent {
     });
   }
 
-  Editar() {
+  async Editar() {
+    this.valores.id_ticket = this.id,
+    this.valores.nombre_completo = this.registerForm.controls['fullname'].value,
+    this.valores.curp = this.registerForm.controls['curp'].value,
+    this.valores.nombre = this.registerForm.controls['name'].value,
+    this.valores.paterno = this.registerForm.controls['paterno'].value,
+    this.valores.materno = this.registerForm.controls['materno'].value,
+    this.valores.telefono = this.registerForm.controls['telefono'].value,
+    this.valores.celular = this.registerForm.controls['celular'].value,
+    this.valores.correo = this.registerForm.controls['correo'].value,
+    this.valores.grado = this.registerForm.controls['nivel'].value,
+    this.valores.municipio = this.registerForm.controls['municipio'].value,
+    this.valores.estatus = this.registerForm.controls['status'].value,
+    this.valores.asunto = this.registerForm.controls['asunto'].value,
+    console.log(this.valores)
+    alert("Actualizando Registro.");
+    this._rutas.actualizarTicket(this.valores, this.valores.id_ticket).subscribe((data)=>{
+      alert("Se actualizo el registro." +JSON.stringify(data));
+    },
+    (error)=>{
+      alert("No se pudo actualizar el registro." +JSON.stringify(error));
+    });
   }
 
   async Eliminar() {
