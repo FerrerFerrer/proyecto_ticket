@@ -119,8 +119,11 @@
             <option value="4">Constancia</option>
           </select>
         </div>
-        <div class="d-flex justify-content-center  form-group">
+        <div *ngIf="editando === 'no'" class="d-flex justify-content-center  form-group">
           <input type="submit" value="Generar Turno">
+        </div>
+        <div *ngIf="editando === 'si'" class="d-flex justify-content-center  form-group">
+          <input type="submit" value="Editar Ticket">
         </div>
       </form>
     </div>

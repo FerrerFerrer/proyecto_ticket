@@ -19,7 +19,7 @@ export class RoutesService extends ApiService {
   }
 
   consultarTicket(id_ticket: string, curp: string): Observable<any> {
-    return this.http.get(this.API_URI + "ticket/" + id_ticket +"/" + curp)
+    return this.http.get(this.API_URI + "ticket/"  + curp +"/" + id_ticket)
   }
 
   crearTicket(body: any): Observable<any> {
