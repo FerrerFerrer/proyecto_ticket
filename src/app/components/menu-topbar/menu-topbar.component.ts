@@ -14,7 +14,6 @@ export class MenuTopbarComponent {
   }
 
   ngOnInit() {
-    console.log(this.id);
     // if(id != null){
 
     // }
