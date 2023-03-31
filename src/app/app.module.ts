@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RecaptchaModule, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
 import { NgxCaptchaModule } from 'ngx-captcha';
+import { CrudComponent } from './components/crud/crud.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NgxCaptchaModule } from 'ngx-captcha';
     MenuTopbarComponent,
     InterAdminComponent,
     HomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    CrudComponent
   ],
   imports: [
     BrowserModule,
