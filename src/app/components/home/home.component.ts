@@ -10,41 +10,69 @@ import { RoutesService } from 'src/app/services/routes.service';
 
 export class HomeComponent {
   buscar = { curp: "", turno: 0 }
+
+
+  body = {
+    asunto: 0,
+    celular: 0,
+    correo:"",
+    curp : "",
+    edad: 0, 
+    grado:0,
+    id_ticket:0,
+    id_ticket_muni:0,
+    materno:"",
+    municipio:0,
+    nombre:"",
+    nombre_completo:"",
+    paterno:"",
+    telefono:0,
+  };
+  datosBusqueda = {}
   constructor(private router: Router, private _rutas: RoutesService) {
   }
 
   hacerticket() {
     this.router.navigateByUrl('/ticket')
-
-
   }
+
   validarTurno() {
     if (this.buscar.curp.length < 18 || /\d/.test(this.buscar.curp.substring(0, 4))) {
       console.log(this.buscar.curp.substring(0, 3))
       alert("CURP INCORRECTA!")
       return
     } else {
-      alert('CURP Correcta')
       if (this.buscar.turno < 0) {
         alert("TURNO INVALIDO!")
       }
       else {
         this.buscarTicket(this.buscar.curp, this.buscar.turno);
+
       }
     }
 
   }
 
 
-  buscarTicket(curp: string, ticket: any) {
+  async buscarTicket(curp: string, ticket: any) {
     let ticketString: string = ticket;
-    this._rutas.consultarTicket(ticketString, curp).subscribe(
+    this._rutas.consultarTicket(ticket, curp).subscribe(
       (data) => {
-        console.log(data);
-    },
-    (error) => {
+        // console.log(data[0]);
+        this.body = data[0];
+        localStorage.setItem("editar", JSON.stringify(data[0]))
+      },
+      (error) => {
+        console.log(error);
+        
+      })
 
-    })
   }
 
+  editarTicket(){
+  // //  let loco = localStorage.getItem("editar")
+  //  console.log(loco);
+  localStorage.setItem("respuesta","si");
+   this.router.navigateByUrl('/ticket')
+  }
 }

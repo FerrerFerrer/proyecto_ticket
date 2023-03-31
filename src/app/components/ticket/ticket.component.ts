@@ -24,13 +24,22 @@ export class TicketComponent {
     grado: 0,
     municipio: 0,
     asunto: 0
-};
+  };
 
   registerForm !: FormGroup
   submitted = false;
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    let respuesta = localStorage.getItem("respuesta");
+    if(respuesta == "si"){
+      let valores: any = localStorage.getItem("editar");
+      valores = JSON.parse(valores);
+      this.Globalticket = valores;
+      localStorage.removeItem("editar")
+      localStorage.setItem("respuesta", "no");
+    }
+
     this.registerForm = this.formBuilder.group({
       nombreCompleto: ['', Validators.required],
       curp: ['', Validators.required],
@@ -53,17 +62,17 @@ export class TicketComponent {
     //detiene el proceso si la forma es invalida
     if (this.registerForm.invalid) {
       this.validar_aspirante();
-    }else {
+    } else {
       this.crear_Ticket();
     }
   }
- 
+
   validar_aspirante() {
     const telefono = this.registerForm.controls['telefono'].value;
     const celular = this.registerForm.controls['celular'].value;
     const correo = this.registerForm.controls['correo'].value;
     const curp = this.registerForm.controls['curp'].value;
-    const nombreCompleto = this.registerForm.controls['nombreCompleto'].value;
+    // const nombreCompleto = this.registerForm.controls['nombreCompleto'].value;
     const nombre = this.registerForm.controls['nombre'].value;
     const paterno = this.registerForm.controls['paterno'].value;
     const materno = this.registerForm.controls['materno'].value;
@@ -71,16 +80,17 @@ export class TicketComponent {
     const interes = this.registerForm.controls['interes'].value;
     const interes2 = this.registerForm.controls['interes2'].value;
     const interes3 = this.registerForm.controls['interes3'].value;
-  
+
     const telefonoRegex = /^[0-9]{10}$/;
     const correoRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const curpRegex = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/;
 
-  
-    if (nombreCompleto.length < 10) {
-      alert('El campo de nombre completo debe contener al menos 10 caracteres');
-    }
-    else if (!curpRegex.test(curp)) {
+
+    // if (nombreCompleto.length < 10) {
+    //   alert('El campo de nombre completo debe contener al menos 10 caracteres');
+    // }
+
+    if (!curpRegex.test(curp)) {
       alert('El campo de CURP debe tener un formato válido');
     }
     else if (nombre.length < 5) {
@@ -118,37 +128,22 @@ export class TicketComponent {
     }
   }
 
-  crear_Ticket(){
-    // const ticket = {
-    //   nombre_completo: this.registerForm.controls['nombreCompleto'].value,
-    //   nombre: this.registerForm.controls['nombre'].value,
-    //   paterno: this.registerForm.controls['paterno'].value,
-    //   materno: this.registerForm.controls['materno'].value,
-    //   curp: this.registerForm.controls['curp'].value,
-    //   edad: this.registerForm.controls['edad'].value,
-    //   telefono: this.registerForm.controls['telefono'].value,
-    //   celular: this.registerForm.controls['celular'].value,
-    //   correo: this.registerForm.controls['correo'].value,
-    //   grado: this.registerForm.controls['interes'].value,
-    //   municipio: this.registerForm.controls['interes2'].value,
-    //   asunto: this.registerForm.controls['interes3'].value,
-    // };
-
+  crear_Ticket() {
     const ticket = {
       id_ticket_muni: this.Globalticket.id_ticket_muni,
-      nombre_completo: 'Juan Alejandfro',
-      nombre: 'Juan Alejandfro',
-      paterno: 'Juan Alejandfro',
-      materno: 'Juan Alejandfro',
-      curp: 'Juan Alejandfro',
-      edad: 6,
-      telefono: 8444,
-      celular: 4555,
-      correo: 'Ja@jg.com',
-      grado: 1,
-      municipio: 1,
-      asunto: 1
-  };
+      nombre_completo: this.Globalticket.nombre_completo,
+      nombre: this.Globalticket.nombre,
+      paterno: this.Globalticket.paterno,
+      materno: this.Globalticket.materno,
+      curp: this.Globalticket.curp,
+      edad: this.Globalticket.edad,
+      telefono: this.Globalticket.telefono,
+      celular: this.Globalticket.celular,
+      correo: this.Globalticket.correo,
+      grado: this.Globalticket.grado,
+      municipio: this.Globalticket.municipio,
+      asunto: this.Globalticket.asunto
+    };
 
     fetch('http://localhost:8080/api/ticket', {
       method: 'POST',
@@ -157,16 +152,16 @@ export class TicketComponent {
         'Content-Type': 'application/json'
       }
     })
-    .then(response => {
-      if (response.ok) {
-        alert('Ticket creado con éxito');
-      } else {
+      .then(response => {
+        if (response.ok) {
+          alert('Ticket creado con éxito');
+        } else {
+          alert('Error al crear ticket');
+        }
+      })
+      .catch(error => {
         alert('Error al crear ticket');
-      }
-    })
-    .catch(error => {
-      alert('Error al crear ticket');
-    });
+      });
   }
 
 }

@@ -16,15 +16,14 @@
           <!-- <div class="mb-3"> -->
           <label class="form-label" for="nombreCompleto">Nombre completo de quien realizará el trámite:</label>
           <input class="form-control"  formControlName="nombreCompleto" name="nombreCompleto" type="text"
-            id="f_nombreCompleto"
-            [ngClass]="{ 'is-invalid': submitted && registerForm.controls['nombreCompleto'].errors }">
+            id="f_nombreCompleto">
           <div *ngIf="submitted && registerForm.controls['nombreCompleto'].errors" class="text-danger">
             <div *ngIf="registerForm.controls['nombreCompleto'].errors['required']">Nombre completo por favor</div>
           </div>
 
           <label for="curp">CURP:</label>
           <input class="form-control" formControlName="curp" name="curp" type="text" id="f_curp" minlength="18" maxlength="18" [ngClass]="{ 'is-invalid': submitted &&
-              registerForm.controls['curp'].errors }">
+              registerForm.controls['curp'].errors }" [(ngModel)]="Globalticket.curp">
           <div *ngIf="submitted && registerForm.controls['curp'].errors" class="text-danger">
             <div *ngIf="registerForm.controls['curp'].errors['required']">Curp
               es requerido</div>
@@ -43,31 +42,30 @@
           </div>
           <label for="paterno">Paterno:</label>
           <input class="form-control" formControlName="paterno" name="paterno" type="text" id="f_paterno" [ngClass]="{ 'is-invalid': submitted &&
-              registerForm.controls['paterno'].errors }">
+              registerForm.controls['paterno'].errors }" [(ngModel)]="Globalticket.paterno">
           <div *ngIf="submitted && registerForm.controls['paterno'].errors" class="text-danger">
             <div *ngIf="registerForm.controls['paterno'].errors['required']">A.
               paterno es requerido</div>
           </div>
           <label for="materno">Materno:</label>
           <input class="form-control" formControlName="materno" name="materno" type="text" id="f_materno" [ngClass]="{ 'is-invalid': submitted &&
-              registerForm.controls['materno'].errors }">
+              registerForm.controls['materno'].errors }" [(ngModel)]="Globalticket.materno">
           <div *ngIf="submitted && registerForm.controls['materno'].errors" class="text-danger">
             <div *ngIf="registerForm.controls['materno'].errors['required']">A.
               materno es requerido</div>
           </div>
           <label for="edad">Edad:</label>
-          <input class="form-control" formControlName="edad" name="edad" type="number" value="3" min="3" max="100" id="f_edad" [ngClass]="{ 'is-invalid': submitted &&
-              registerForm.controls['edad'].errors }">
+          <input class="form-control" formControlName="edad" name="edad" type="number" min="3" max="100" id="f_edad" [ngClass]="{ 'is-invalid': submitted &&
+              registerForm.controls['edad'].errors }" [(ngModel)]="Globalticket.edad">
           <div *ngIf="submitted && registerForm.controls['edad'].errors" class="text-danger">
-            <div *ngIf="registerForm.controls['edad'].errors['required']">A.
-              edad es requerida</div>
+            <div *ngIf="registerForm.controls['edad'].errors['required']">A. edad es requerida</div>
           </div>
         </div>
         <div class="mb-3">
           <label for="telefono">Telefono:</label>
           <input class="form-control" formControlName="telefono" name="telefono" type="text" minlength="10" maxlength="10" id="f_telefono"
             [ngClass]="{ 'is-invalid': submitted &&
-              registerForm.controls['telefono'].errors }">
+              registerForm.controls['telefono'].errors }" [(ngModel)]="Globalticket.telefono">
           <div *ngIf="submitted && registerForm.controls['telefono'].errors" class="text-danger">
             <div *ngIf="registerForm.controls['telefono'].errors['required']">Telefono
               es requerido</div>
@@ -75,14 +73,14 @@
           <label for="celular">Celular:</label>
           <input  class="form-control" formControlName="celular" name="celular" type="text" minlength="10" maxlength="10" id="f_celular"
             [ngClass]="{ 'is-invalid': submitted &&
-              registerForm.controls['celular'].errors }">
+              registerForm.controls['celular'].errors }" [(ngModel)]="Globalticket.celular">
           <div *ngIf="submitted && registerForm.controls['celular'].errors" class="text-danger">
             <div *ngIf="registerForm.controls['celular'].errors['required']">Celular
               es requerido</div>
           </div>
           <label for="correo">Correo:</label>
           <input class="form-control" formControlName="correo" name="correo" type="email" id="f_correo" [ngClass]="{ 'is-invalid': submitted &&
-              registerForm.controls['correo'].errors }">
+              registerForm.controls['correo'].errors }" [(ngModel)]="Globalticket.correo">
           <div *ngIf="submitted && registerForm.controls['correo'].errors" class="text-danger">
             <div *ngIf="registerForm.controls['correo'].errors['required']">Correo
               es requerido</div>
@@ -103,23 +101,23 @@
         <div class="mb-3">
           <label for="interes2">Municipio donde desea estudie el alumno:
           </label>
-          <select formControlName="interes2" name="interes2" id="f_interes2">
-            <option value="" selected disabled hidden>Municipio</option>
-            <option>Saltillo</option>
-            <option>Monterrey</option>
-            <option>Arteaga</option>
-            <option>Ramos</option>
-            <option>Parras</option>
+          <select formControlName="interes2" name="interes2" id="f_interes2" [(ngModel)]="Globalticket.municipio">
+            <option  selected disabled hidden>Municipio</option>
+            <option value="1">Saltillo</option>
+            <option value="2">Monterrey</option>
+            <option value="3">Arteaga</option>
+            <option value="4">Ramos</option>
+            <option value="5">Parras</option>
           </select>
         </div>
         <div class="mb-3">
           <label for="interes3">Seleccione el asunto que va a tratar: </label>
-          <select formControlName="interes3" name="interes3" id="f_interes3">
-            <option value="" selected disabled hidden>Interes</option>
-            <option>Incripción</option>
-            <option>Recursar</option>
-            <option>Baja</option>
-            <option>Constancia</option>
+          <select formControlName="interes3" name="interes3" id="f_interes3" [(ngModel)]="Globalticket.asunto">
+            <option selected disabled hidden>Interes</option>
+            <option value="1">Incripción</option>
+            <option value="2">Recursar</option>
+            <option value="3">Baja</option>
+            <option value="4">Constancia</option>
           </select>
         </div>
         <div class="d-flex justify-content-center  form-group">
