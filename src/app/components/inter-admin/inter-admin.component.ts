@@ -1,3 +1,4 @@
+import { ParseSourceSpan } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RoutesService } from 'src/app/services/routes.service';
@@ -10,19 +11,27 @@ import { RoutesService } from 'src/app/services/routes.service';
 export class InterAdminComponent {
   title = 'tarea-angular';
   id = 0
+  selects = {
+    nivelValue: "Selecciona un nivel",
+    municipioValue: "Selecciona un municipio",
+    asuntoValue: "Selecciona un asunto",
+    estatusValue: "Selecciona un estatus",
+  }
 
   valores = {
+    id_ticket_muni: 0,
     nombre_completo: "",
     curp: "",
     nombre: "",
     paterno: "",
     materno: "",
     telefono: "",
+    edad:0,
     celular: "",
     correo: "",
-    nivel: "",
-    municipio: "",
-    asunto: "",
+    grado: 0,
+    municipio: 0,
+    asunto: 0,
     estatus: "",
   }
 
@@ -66,7 +75,7 @@ export class InterAdminComponent {
     }
   }
 
-  validar_aspirante() {
+  async validar_aspirante() {
     const telefono = this.registerForm.controls['telefono'].value;
     const celular = this.registerForm.controls['celular'].value;
     const correo = this.registerForm.controls['correo'].value;
@@ -160,18 +169,56 @@ export class InterAdminComponent {
     this.valores.telefono = cont.telefono;
     this.valores.celular = cont.celular;
     this.valores.correo = cont.correo;
-    this.valores.nivel = cont.nivel;
-    this.valores.municipio = cont.municipio;
-    this.valores.asunto = cont.asunto;
-    this.valores.estatus = cont.status;
+    this.selects.nivelValue = cont.nivel;
+    this.selects.municipioValue = cont.municipio;
+    this.selects.asuntoValue = cont.asunto;
+    this.selects.estatusValue = cont.status;
+    console.log(this.selects.nivelValue);
   }
-  Agregar() {
+  
+  async Agregar() {
+    this.valores.id_ticket_muni = 1,
+    this.valores.nombre_completo = this.registerForm.controls['fullname'].value,
+    this.valores.curp = this.registerForm.controls['curp'].value,
+    this.valores.nombre = this.registerForm.controls['name'].value,
+    this.valores.paterno = this.registerForm.controls['paterno'].value,
+    this.valores.materno = this.registerForm.controls['materno'].value,
+    this.valores.telefono = this.registerForm.controls['telefono'].value,
+    this.valores.celular = this.registerForm.controls['celular'].value,
+    this.valores.correo = this.registerForm.controls['correo'].value,
+    this.valores.grado = this.registerForm.controls['nivel'].value,
+    this.valores.municipio = this.registerForm.controls['municipio'].value,
+    this.valores.estatus = this.registerForm.controls['status'].value,
+    this.valores.asunto = this.registerForm.controls['asunto'].value,
+    this.valores.edad = 8
+
+    alert("Añadiendo Registro.");
+    this._rutas.crearTicket(this.valores).subscribe((data)=>{
+      alert("Se añadio el registro." +JSON.stringify(data));
+    },
+    (error)=>{
+      alert("No se pudo agregar el registro." +JSON.stringify(error));
+    });
   }
 
   Editar() {
   }
 
-  Eliminar() {
-    alert("Eliminando registro.")
+  async Eliminar() {
+    alert("Eliminando registro.");
+    console.log("id:" +this.id)
+    if(this.id != 0){  
+      this._rutas.borrarTicket(this.id).subscribe((data) => {
+        alert("Registro Eliminado." +JSON.stringify(data))
+      },
+        (error) => {
+          alert("error al conectar con la db"+JSON.stringify(error));
+        }
+      );
+      this.id = 0;
+    }
+    else{
+      alert("No hay nada que eliminar.");
+    }
   }
 }
