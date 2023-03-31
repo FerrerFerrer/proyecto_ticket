@@ -1,6 +1,5 @@
 <app-menu-topbar></app-menu-topbar>
 <div class="container">
-  <h2>Untitled Page</h2>
   <fieldset>
     <div>
       <img id="sup1" align="left" src="../assets/img/se.jpg" alt="logoSecretaria">
@@ -16,7 +15,7 @@
           <!-- <div class="mb-3"> -->
           <label class="form-label" for="nombreCompleto">Nombre completo de quien realizará el trámite:</label>
           <input class="form-control"  formControlName="nombreCompleto" name="nombreCompleto" type="text"
-            id="f_nombreCompleto">
+            id="f_nombreCompleto" [(ngModel)]="Globalticket.nombre_completo">
           <div *ngIf="submitted && registerForm.controls['nombreCompleto'].errors" class="text-danger">
             <div *ngIf="registerForm.controls['nombreCompleto'].errors['required']">Nombre completo por favor</div>
           </div>
