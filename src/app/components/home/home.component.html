@@ -24,9 +24,39 @@
             </div>
 
             <div id="contenedor-2">
-
                 <div>
                     <button (click)="validarTurno()">Buscar</button>
+                </div>
+            </div>
+            <div class="quest" *ngIf="body.asunto > 0">
+                <div class="input-container">
+                    <input readonly id="input" required="" type="text" name="Numerodeturno" [(ngModel)]="body.nombre_completo">
+                    <label for="Numerodeturno"  >Nombre completo</label>
+                    <div class="underline"></div>
+                    <input readonly id="input" required="" type="text" name="Numerodeturno" [(ngModel)]="body.curp">
+                    <label for="Numerodeturno"  >CURP</label>
+                    <div class="underline"></div>
+                    <input readonly id="input" required="" type="text" name="Numerodeturno" [(ngModel)]="body.asunto">
+                    <label for="Numerodeturno"  >Asnto</label>
+                    <div class="underline"></div>
+                    <input readonly id="input" required="" type="text" name="Numerodeturno" [(ngModel)]="body.telefono">
+                    <label for="Numerodeturno"  >Telefono</label>
+                    <div class="underline"></div>
+                    <input readonly id="input" required="" type="text" name="Numerodeturno" [(ngModel)]="body.celular">
+                    <label for="Numerodeturno"  >Celular</label>
+                    <div class="underline"></div>
+                    <input readonly id="input" required="" type="text" name="Numerodeturno" [(ngModel)]="body.correo">
+                    <label for="Numerodeturno">Correo</label>
+                    <div class="underline"></div>
+                    <input readonly id="input" required="" type="text" name="Numerodeturno" [(ngModel)]="body.edad">
+                    <label for="Numerodeturno"  >Edad</label>
+                    <div class="underline"></div>
+                    <input readonly id="input" required="" type="text" name="Numerodeturno" [(ngModel)]="body.grado">
+                    <label for="Numerodeturno"  >Grado</label>
+                    <div class="underline"></div>
+                    <div>
+                        <button (click)="editarTicket()">Editar</button>
+                    </div>
                 </div>
             </div>
         </div>
